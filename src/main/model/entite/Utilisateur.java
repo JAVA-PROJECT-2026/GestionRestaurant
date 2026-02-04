@@ -8,6 +8,6 @@ package main.model.entite;
  *
  * @author isaac
  */
-public class Stock {
+public class Utilisateur {
     
 }

@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.model.entite;
+import main.model.entite.enums.TypeMouvement;
 import java.time.LocalDateTime;
-
 
 /**
  *
@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
  */
 public class MouvementStock {
     
-     private int idMouv;
-    private String typeMouv;
-    private int idProd;
+    private int idMouv;
+    private TypeMouvement typeMouv;
+    private Produit produit;
     private int quantite;
     private LocalDateTime dateMouv;
     private String motif;
@@ -30,19 +30,19 @@ public class MouvementStock {
     }
 
     public String getTypeMouv() {
-        return typeMouv;
+        return typeMouv.name();
     }
 
-    public void setTypeMouv(String typeMouv) {
+    public void setTypeMouv(TypeMouvement typeMouv) {
         this.typeMouv = typeMouv;
     }
 
-    public int getIdProd() {
-        return idProd;
+    public Produit getProduit() {
+        return produit;
     }
 
-    public void setIdProd(int idProd) {
-        this.idProd = idProd;
+    public void setProd(Produit produit) {
+        this.produit = produit;
     }
 
     public int getQuantite() {
@@ -50,6 +50,9 @@ public class MouvementStock {
     }
 
     public void setQuantite(int quantite) {
+        if (quantite < 0) {
+            throw new IllegalArgumentException("La quantite ne peut pas etre négatif");
+        }
         this.quantite = quantite;
     }
 

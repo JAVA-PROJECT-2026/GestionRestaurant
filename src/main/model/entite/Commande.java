@@ -5,20 +5,26 @@
 package main.model.entite;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import main.model.entite.enums.EtatCommande;
 
 /**
  *
  * @author isaac
  */
+
+
 public class Commande {
     private String idCom;
     private LocalDateTime dateCommande;
-    private String etat;
+    private EtatCommande etat;
+    private double total;
 
-    public Commande(LocalDateTime dateCommande, String etat) {
+    public Commande(LocalDateTime dateCommande, EtatCommande etat, double total) {
         this.idCom = UUID.randomUUID().toString();
         this.dateCommande = dateCommande;
         this.etat = etat;
+        this.total = total;
+        
     }
     public Commande(){}
 
@@ -38,13 +44,16 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
-    public String getEtat() {
+    public EtatCommande getEtat() {
         return etat;
     }
 
-    public void setEtat(String etat) {
+    public void setEtat(EtatCommande etat) {
         this.etat = etat;
     }
     
+    public double getTotalCommande(){
+        return total;
+    }
     
 }

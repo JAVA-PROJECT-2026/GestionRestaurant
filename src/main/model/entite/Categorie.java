@@ -16,8 +16,15 @@ public class Categorie {
     public String getLibelle(){
         return this.libelle;
     }
+    
     public int getIdCat(){
         return this.idCat;
+    }
+    
+    // sera utiliser pour afficher les categorie dans les interfaces swing
+    @Override
+    public String toString(){
+        return this.libelle;
     }
     
     

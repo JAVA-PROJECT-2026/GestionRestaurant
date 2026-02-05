@@ -48,13 +48,13 @@ public class UtilisateurDAO {
         }
     }
 
-    public void delete(String id) {
+    public void delete(Utilisateur utilisateur) {
         String sql = "DELETE FROM Utilisateur WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, id);
+            ps.setString(1, utilisateur.getId());
             ps.executeUpdate();
 
         } catch (SQLException e) {

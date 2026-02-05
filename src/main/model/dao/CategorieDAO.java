@@ -45,13 +45,13 @@ public class CategorieDAO {
     }
 
     // DELETE
-    public void delete(String idCat) {
+    public void delete(Categorie categorie) {
         String sql = "DELETE FROM Categorie WHERE idCat = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, idCat);
+            ps.setString(1, categorie.getIdCat());
             ps.executeUpdate();
 
         } catch (SQLException e) {

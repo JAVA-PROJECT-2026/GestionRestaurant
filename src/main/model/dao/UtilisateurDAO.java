@@ -6,6 +6,7 @@ package main.model.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import main.model.dao.DatabaseConnection;
 import main.model.entite.Utilisateur;
 
 /**

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.model.entite;
+import java.util.UUID;
 
 /**
  *
@@ -10,27 +11,34 @@ package main.model.entite;
  */
 public class LigneCommande {
     
-    private int idCom;
-    private int idProd;
+    private String idCom;
+    private String idProd;
     private int quantite;
     private double prixUnitaire;
     private double montantLigne;
-
+    
     public LigneCommande() {}
+    
+public LigneCommande(String idCom, String idProd, int quantite, double prixUnitaire){
+    this.idCom = idCom;
+    this.idProd = idProd;
+    this.prixUnitaire = prixUnitaire;
+    this.quantite = quantite;
+}
 
-    public int getIdCom() {
+    public String getIdCom() {
         return idCom;
     }
 
-    public void setIdCom(int idCom) {
+    public void setIdCom(String idCom) {
         this.idCom = idCom;
     }
 
-    public int getIdProd() {
+    public String getIdProd() {
         return idProd;
     }
 
-    public void setIdProd(int idProd) {
+    public void setIdProd(String idProd) {
         this.idProd = idProd;
     }
 
@@ -53,6 +61,6 @@ public class LigneCommande {
     public double getMontantLigne() {
         return montantLigne;
     }
-
+    // c'est pas une érreur, je n'ai pasvolontairement fait le setters de montantLigne
     
 }

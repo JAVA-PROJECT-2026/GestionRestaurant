@@ -56,4 +56,8 @@ public class Commande {
         return total;
     }
     
+    public void setTotalCommande(double total){
+        this.total =total;
+    }
+    
 }

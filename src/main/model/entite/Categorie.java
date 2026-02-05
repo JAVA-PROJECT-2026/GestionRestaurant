@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.model.entite;
+import java.util.UUID;
 
 /**
  *
@@ -10,14 +11,14 @@ package main.model.entite;
  */
 public class Categorie {
     
-    private int idCat;
+    private String idCat;
     private String libelle;
     
     public String getLibelle(){
         return this.libelle;
     }
     
-    public int getIdCat(){
+    public String getIdCat(){
         return this.idCat;
     }
     
@@ -28,4 +29,22 @@ public class Categorie {
     }
     
     
+
+    public Categorie(String libelle) {
+        this.idCat = UUID.randomUUID().toString();
+        this.libelle = libelle;
+    }
+    
+    public Categorie(){}
+
+
+    public void setIdCat(String idCat) {
+        this.idCat = idCat;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+
 }

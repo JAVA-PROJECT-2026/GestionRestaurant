@@ -5,6 +5,7 @@
 package main.model.entite;
 import main.model.entite.enums.TypeMouvement;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  *
@@ -12,20 +13,29 @@ import java.time.LocalDateTime;
  */
 public class MouvementStock {
     
-    private int idMouv;
+
+
     private TypeMouvement typeMouv;
-    private Produit produit;
+    private String idMouv;
+    private String idProd;
     private int quantite;
     private LocalDateTime dateMouv;
     private String motif;
 
-    public MouvementStock() {}
+    public MouvementStock(TypeMouvement typeMouv, String idProd,int quantite, LocalDateTime dateMouv, String motif ) {
+        this.idMouv = UUID.randomUUID().toString();
+        this.dateMouv = dateMouv;
+        this.idProd = idProd;
+        this.quantite = quantite;
+        this.typeMouv = typeMouv;
+        this.motif = motif;
+    }
 
-    public int getIdMouv() {
+    public String getIdMouv() {
         return idMouv;
     }
 
-    public void setIdMouv(int idMouv) {
+    public void setIdMouv(String idMouv) {
         this.idMouv = idMouv;
     }
 
@@ -37,12 +47,12 @@ public class MouvementStock {
         this.typeMouv = typeMouv;
     }
 
-    public Produit getProduit() {
-        return produit;
+    public String getIdProd() {
+        return idProd;
     }
 
-    public void setProd(Produit produit) {
-        this.produit = produit;
+    public void setIdProd(String idProd) {
+        this.idProd = idProd;
     }
 
     public int getQuantite() {

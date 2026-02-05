@@ -15,33 +15,33 @@ import java.util.UUID;
  */
 public class Produit {
     
-    private String id;
+    private String idProd;
     private String nom;
-    private Categorie categorie; // Relation POO : On utilise l'objet, pas l'ID
-    private double prixVente;
+    private double prixDeVente;
     private int stockActuel;
     private int seuilAlerte;
+    private Categorie categorie;
 
-    
     public Produit() {}
+    public Produit(String nom, double prixDeVente, int stockActuel, int seuilAlerte, String idCat) {
+    this.idProd = UUID.randomUUID().toString();
+    this.nom = nom;
+    this.prixDeVente = prixDeVente;
+    this.stockActuel = stockActuel;
+    this.seuilAlerte = seuilAlerte;
 
-    
-    public Produit(int id, String nom, Categorie categorie, double prixVente, int stockActuel, int seuilAlerte) {
-        this.id = UUID.randomUUID().toString();
-        this.nom = nom;
-        this.categorie = categorie;
-        this.prixVente = prixVente; 
-        this.stockActuel = stockActuel; 
-        this.seuilAlerte = seuilAlerte;
+    this.categorie = new Categorie();
+    this.categorie.setIdCat(idCat);
+}
+
+
+
+    public String getIdProd() {
+        return idProd;
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setIdProd(String idProd) {
+        this.idProd = idProd;
     }
 
     public String getNom() {
@@ -52,6 +52,7 @@ public class Produit {
         this.nom = nom;
     }
 
+
     public Categorie getCategorie() {
         return categorie;
     }
@@ -61,17 +62,17 @@ public class Produit {
     }
 
     public double getPrixVente() {
-        return prixVente;
+        return this.prixDeVente;
     }
 
     public void setPrixVente(double prixVente) {
         if (prixVente > 0) {
-            this.prixVente = prixVente;
+            this.prixDeVente = prixVente;
         } else {
             System.err.println("Le prix de vente doit être strictement positif.");
             throw new IllegalArgumentException("Le prix de vente doit être strictement positif.");
         }
-    }
+    }    
 
     public int getStockActuel() {
         return stockActuel;
@@ -84,6 +85,9 @@ public class Produit {
             System.err.println("Le stock ne peut pas être négatif.");
             throw new IllegalArgumentException("Le stock ne peut pas être négatif.");
         }
+
+        this.stockActuel = stockActuel;
+
     }
 
     public int getSeuilAlerte() {
@@ -94,9 +98,11 @@ public class Produit {
         this.seuilAlerte = seuilAlerte;
     }
 
+
     // Utile pour afficher le nom du produit dans les JComboBox de l'interface Swing
     @Override
     public String toString() {
         return this.nom;
     }
 }
+

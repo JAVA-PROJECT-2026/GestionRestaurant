@@ -62,20 +62,29 @@ public class UtilisateurDAO {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Supprimer un utilisateur par ID
      * @param id L'ID de l'utilisateur à supprimer
      * @return true si la suppression a réussi
      */
     public boolean delete(String id) {
+=======
+    public void delete(Utilisateur utilisateur) {
+>>>>>>> 3579b84 (correction de categoriedao)
         String sql = "DELETE FROM Utilisateur WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
+<<<<<<< HEAD
             ps.setString(1, id);
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
+=======
+            ps.setString(1, utilisateur.getId());
+            ps.executeUpdate();
+>>>>>>> 3579b84 (correction de categoriedao)
 
         } catch (SQLException e) {
             System.err.println("Erreur lors de la suppression de l'utilisateur: " + e.getMessage());

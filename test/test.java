@@ -3,7 +3,7 @@ import main.model.entite.Categorie;
 import main.model.entite.Utilisateur;
 import main.model.dao.CategorieDAO;
 
-public class MainTest {
+public class test {
     public static void main(String[] args) {
 
         UtilisateurDAO userDao = new UtilisateurDAO();

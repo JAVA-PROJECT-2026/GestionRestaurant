@@ -4,6 +4,7 @@
  */
 package main.model.dao;
 
+import main.util.DatabaseConnection;
 import main.model.entite.Produit;
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ProduitDAO {
 
     // DAO pour inserer un produit
-    public void insert(Produit produit){
+    public void insertProduit(Produit produit){
         String sql = "INSERT INTO Produit (nom, idCategorie, prixDeVente, stockActuel, seuilAlerte) VALUES(?, ?, ?, ?, ?)";
 
         try(Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sql)){
@@ -32,6 +33,49 @@ public class ProduitDAO {
             e.printStackTrace();
         }
     }
+    
+    
+    //DAO pour supprimer un produit
+    public void deleteProduit(Produit produit) {
+        
+        String sql = "DELETE FROM Produit WHERE idProd = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sql)) {
+        
+            pst.setString(1, produit.getIdProd());
+            pst.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    //DAO update nom d'un produit 
+    public void updateProduit(Produit produit) {
+        
+        String sql = "UPDATE Produit SET nom = ?, prixDeVente = ?, seuilAlerte = ?, stockActuel = ? WHERE idProd = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sql)) {
+        
+            pst.setString(1, produit.getNom());
+            pst.setDouble(2, produit.getPrixVente());
+            pst.setInt(3, produit.getSeuilAlerte());
+            pst.setInt(4, produit.getStockActuel());
+            pst.setString(5, produit.getIdProd());
+            
+            int eleme_updated = pst.executeUpdate();
+            
+            if (eleme_updated > 0) {
+                System.out.println("Mise à jour réussi !");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
 
     //DAO pour read un produit
     public List<Produit> findAllProduits(){

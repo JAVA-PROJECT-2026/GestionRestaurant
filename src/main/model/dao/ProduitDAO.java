@@ -4,6 +4,7 @@
  */
 package main.model.dao;
 
+import main.util.DatabaseConnection;
 import main.model.entite.Produit;
 import java.sql.*;
 import java.util.ArrayList;

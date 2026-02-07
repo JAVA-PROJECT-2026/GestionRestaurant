@@ -4,6 +4,7 @@
  */
 package main.model.dao;
 
+import main.util.DatabaseConnection;
 import main.model.entite.Produit;
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import main.model.entite.enums.TypeMouvement;
 // DAO pour insert/ajouter un user dans la base de donnée
 public class StockDAO {
     public void insertStock(MouvementStock stock) {
-        String sql = "INSERT INTO Stock (typeMouv, idProd, quantite, dateMouv, motif";
+        String sql = "INSERT INTO Stock (typeMouv, idProd, quantite, dateMouv, motif) VALUES (?, ?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
             
@@ -65,6 +66,48 @@ public class StockDAO {
         }
         
         return stocks;
+    }
+    
+    
+    //DAO pour supprimer un stock
+    public void deleteStock(MouvementStock stock) {
+        
+        String sql = "DELETE FROM MouvementStock WHERE idMouv = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sql)) {
+        
+            pst.setString(1, stock.getIdMouv());
+            pst.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    //DAO update nom d'un stock 
+    public void updateStock(MouvementStock stock) {
+        
+        String sql = "UPDATE Produit SET typeMouv = ?, idProd = ?, quantite = ?, dateMouv = ?, motif ?  WHERE idMouv = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sql)) {
+        
+            pst.setString(1, stock.getTypeMouv());
+            pst.setString(2, stock.getIdProd());
+            pst.setInt(3, stock.getQuantite());
+            pst.setDate(4, (Date) stock.getDateMouv());
+            pst.setString(5, stock.getMotif());
+            pst.setString(6, stock.getIdMouv());
+            
+            int eleme_updated = pst.executeUpdate();
+            
+            if (eleme_updated > 0) {
+                System.out.println("Mise à jour réussi !");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

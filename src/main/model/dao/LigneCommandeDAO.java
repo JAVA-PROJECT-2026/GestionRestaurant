@@ -10,4 +10,6 @@ package main.model.dao;
  */
 public class LigneCommande {
     
+    
+    
 }

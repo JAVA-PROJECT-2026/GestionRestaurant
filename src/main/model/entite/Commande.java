@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.model.entite;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 import main.model.entite.enums.EtatCommande;
 
@@ -15,11 +15,11 @@ import main.model.entite.enums.EtatCommande;
 
 public class Commande {
     private String idCom;
-    private LocalDateTime dateCommande;
+    private Date dateCommande;
     private EtatCommande etat;
     private double total;
 
-    public Commande(LocalDateTime dateCommande, EtatCommande etat, double total) {
+    public Commande(Date dateCommande, EtatCommande etat, double total) {
         this.idCom = UUID.randomUUID().toString();
         this.dateCommande = dateCommande;
         this.etat = etat;
@@ -36,11 +36,11 @@ public class Commande {
         this.idCom = idCom;
     }
 
-    public LocalDateTime getDateCommande() {
+    public Date getDateCommande() {
         return dateCommande;
     }
 
-    public void setDateCommande(LocalDateTime dateCommande) {
+    public void setDateCommande(Date dateCommande) {
         this.dateCommande = dateCommande;
     }
 

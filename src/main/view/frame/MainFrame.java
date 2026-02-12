@@ -79,7 +79,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         containerPanel = new javax.swing.JPanel();
-        dashbordPanel1 = new main.view.panel.DashbordPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("menuPrincipal"); // NOI18N
@@ -285,7 +284,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlMenuLayout.setHorizontalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, Short.MAX_VALUE)
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,8 +299,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         containerPanel.setBackground(new java.awt.Color(204, 204, 204));
         containerPanel.setLayout(new java.awt.BorderLayout());
-        containerPanel.add(dashbordPanel1, java.awt.BorderLayout.CENTER);
-
         getContentPane().add(containerPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -360,7 +357,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel containerPanel;
-    private main.view.panel.DashbordPanel dashbordPanel1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

@@ -6,8 +6,8 @@ package main.model.dao;
 
 /**
  *
- * @author isaac
+ * @author DELL
  */
-public class LigneCommande {
+class Connection {
     
 }

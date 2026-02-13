@@ -16,11 +16,7 @@ public class Utilisateur {
     
     public Utilisateur(String email, String password){
         this.id = UUID.randomUUID().toString();
-<<<<<<< HEAD
         this.email = email;
-=======
-        this.email = login;
->>>>>>> 2b901d4 (feat/ali: Ajout des nouveaux frames)
         this.password = password;
     }
     
@@ -33,21 +29,12 @@ public class Utilisateur {
     public void setId(String id){
         this.id = id;
     }
-<<<<<<< HEAD
     public String getEmail(){
         return this.email;
     }
     
     public void setEmail(String email){
         this.email = email;   
-=======
-    public String getLogin(){
-        return this.email;
-    }
-    
-    public void setLogin(String login){
-        this.email = login;   
->>>>>>> 2b901d4 (feat/ali: Ajout des nouveaux frames)
     }
     
     public String getPassword(){

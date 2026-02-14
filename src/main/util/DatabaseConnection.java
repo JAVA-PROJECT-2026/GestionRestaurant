@@ -21,4 +21,17 @@ public class DatabaseConnection {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
     
+    
+    public static void main(String[] args) {
+        try {
+            Connection con = getConnection();
+            if (con != null) {
+                System.out.println("✅ CONNEXION RÉUSSIE à GestionRestaurant !");
+                con.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ ÉCHEC DE LA CONNEXION : " + e.getMessage());
+        }
+    }
+    
 }

@@ -10,6 +10,7 @@ import main.model.entite.enums.TypeMouvement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import main.model.entite.LigneCommande;
 
 /**
  * DAO pour la gestion des mouvements de stock
@@ -141,7 +142,7 @@ public class StockDAO {
      * @param stock Le mouvement à mettre à jour
      * @return true si la mise à jour a réussi
      */
-    public boolean updateStock(MouvementStock stock) {
+    public boolean updateStock(LigneCommande stock) {
         // ✅ CORRIGÉ: table MouvementStock + syntaxe SQL correcte
         String sql = "UPDATE MouvementStock SET typeMouv = ?, idProd = ?, quantite = ?, dateMouv = ?, motif = ? WHERE idMouv = ?";
         

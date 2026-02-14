@@ -35,30 +35,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         // 3. Centrer la fenêtre
         this.setLocationRelativeTo(null);
-
-        // 4. (Optionnel) Maximiser la fenêtre au démarrage
-        // this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-        
-        // 1. Création du ScrollPane (l'ascenseur)
         javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane();
-
-        // 2. On met ton pnlContainer à l'intérieur
         scrollPane.setViewportView(containerPanel);
 
         // 3. Configuration : barre verticale si besoin, jamais d'horizontale
         scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        // 4. On accélère la molette de la souris (sinon c'est trop lent)
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
-
-        // 5. On retire les bordures moches du scrollpane pour qu'il soit invisible
         scrollPane.setBorder(null);
 
-        // 6. On l'ajoute au centre de la fenêtre (remplace l'ancien affichage)
         this.getContentPane().add(scrollPane, java.awt.BorderLayout.CENTER);
 
-        // 7. Rafraîchissement forcé
         this.revalidate();
         this.repaint();
     }

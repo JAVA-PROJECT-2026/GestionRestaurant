@@ -161,7 +161,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCommande.setBackground(new java.awt.Color(35, 166, 97));
         btnCommande.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnCommande.setForeground(new java.awt.Color(255, 255, 255));
-        btnCommande.setText("Gestion Commandes");
+        btnCommande.setText("🍽️ Gestion Commandes");
         btnCommande.setBorderPainted(false);
         btnCommande.setContentAreaFilled(false);
         btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

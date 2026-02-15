@@ -7,14 +7,20 @@ package main.controller;
 import main.model.dao.CommandeDAO;
 import main.model.dao.LigneCommandeDAO;
 import main.model.dao.StockDAO;
+import main.model.dao.ProduitDAO;
 import main.model.entite.Commande;
 import main.model.entite.LigneCommande;
+import main.model.entite.Produit;
+import main.model.entite.MouvementStock;
+import main.model.entite.enums.TypeMouvement;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Date;
 import main.model.entite.enums.EtatCommande;
+
 /**
- *Controller pour gérer la logique métier des commandes
+ * Controller pour gérer la logique métier des commandes
  * @author isaac
  */
 public class CommandeController {
@@ -22,15 +28,19 @@ public class CommandeController {
     private CommandeDAO commandeDAO;
     private LigneCommandeDAO ligneCommandeDAO;
     private StockDAO stockDAO;
+    private ProduitDAO produitDAO;
     
     public CommandeController(){
         this.commandeDAO = new CommandeDAO();
         this.ligneCommandeDAO = new LigneCommandeDAO();
         this.stockDAO = new StockDAO();
+        this.produitDAO = new ProduitDAO();
     }
     
     /**
      * Recupérer toutes les commandes
+     * @return 
+     * @throws java.sql.SQLException
      */
     public List<Commande> getAllCommandes() throws SQLException{
         return commandeDAO.findAll();
@@ -42,10 +52,15 @@ public class CommandeController {
      * @return 
      * @throws java.sql.SQLException
      */
-    public Commande getCommandeById(String id)throws SQLException{
+    public Commande getCommandeById(String id) throws SQLException{
         return commandeDAO.findById(id);
     }
     
+    /**
+     * Créer une nouvelle commande
+     * @return L'ID de la commande créée
+     * @throws java.sql.SQLException
+     */
     public String creerCommande() throws SQLException{
         Commande commande = new Commande();
         commande.setTotalCommande(0.0);
@@ -54,34 +69,58 @@ public class CommandeController {
         return commande.getIdCom();
     }
     
-    public void ajouterProduitCommande(String Idcom, String Idprod, int quantite, double prix) throws SQLException, IllegalArgumentException{
-        if (!stockDAO.hasEnoughStock(Idprod,quantite)){
+    /**
+     * Ajouter un produit à une commande
+     * @param idCom ID de la commande
+     * @param idProd ID du produit
+     * @param quantite Quantité à ajouter
+     * @param prix Prix unitaire
+     * @throws java.sql.SQLException
+     * @throws java.lang.IllegalArgumentException
+     */
+    public void ajouterProduitCommande(String idCom, String idProd, int quantite, double prix) throws SQLException, IllegalArgumentException{
+        if (!stockDAO.hasEnoughStock(idProd, quantite)){
             throw new IllegalArgumentException("Stock Insuffisant pour ce produit");
         }
         
         LigneCommande ligne = new LigneCommande();
-        ligne.setIdCom(Idcom);
-        ligne.setIdProd(Idprod);
+        ligne.setIdCom(idCom);
+        ligne.setIdProd(idProd);
         ligne.setQuantite(quantite);
         ligne.setPrixUnitaire(prix);
         
         ligneCommandeDAO.insert(ligne);
-        recalculerMontantTotal(Idcom);
+        recalculerMontantTotal(idCom);
     }
     
     /**
      * Supprimer un produit d'une commande
-     * @param idCom
+     * @param idCom ID de la commande
+     * @param idProd ID du produit
      * @throws java.sql.SQLException
      */
-    public void supprimerProduitDeCommande(String IdCom, String Idprod) throws SQLException {
-        LigneCommande ligne = (LigneCommande) ligneCommandeDAO.findByCommande(idCom);
-        if (ligne != null) {
-            String Idcom = ligne.getIdCom();
-            ligneCommandeDAO.delete(Idcom,Idprod);
-            recalculerMontantTotal(Idcom);
+    public void supprimerProduitDeCommande(String idCom, String idProd) throws SQLException {
+        List<LigneCommande> lignes = ligneCommandeDAO.findByCommande(idCom);
+        
+        boolean found = false;
+        for (LigneCommande ligne : lignes) {
+            if (ligne.getIdProd().equals(idProd)) {
+                ligneCommandeDAO.delete(idCom, idProd);
+                found = true;
+                break;
+            }
+        }
+        
+        if (found) {
+            recalculerMontantTotal(idCom);
         }
     }
+    
+    /**
+     * Recalculer le montant total d'une commande
+     * @param commandeId ID de la commande
+     * @throws java.sql.SQLException
+     */
     private void recalculerMontantTotal(String commandeId) throws SQLException {
         List<LigneCommande> lignes = ligneCommandeDAO.findByCommande(commandeId);
         
@@ -94,6 +133,13 @@ public class CommandeController {
         commande.setTotalCommande(total);
         commandeDAO.update(commande);
     }
+    
+    /**
+     * Valider une commande et mettre à jour le stock
+     * @param commandeId ID de la commande
+     * @throws java.sql.SQLException
+     * @throws java.lang.IllegalArgumentException
+     */
     public void validerCommande(String commandeId) throws SQLException, IllegalArgumentException {
         Commande commande = commandeDAO.findById(commandeId);
         
@@ -103,7 +149,7 @@ public class CommandeController {
         
         if (commande.getEtat() != EtatCommande.EN_COURS) {
             throw new IllegalArgumentException(
-                "Seules les commandes en attente peuvent être validées"
+                "Seules les commandes en cours peuvent être validées"
             );
         }
         
@@ -114,19 +160,34 @@ public class CommandeController {
         for (LigneCommande ligne : lignes) {
             if (!stockDAO.hasEnoughStock(ligne.getIdProd(), ligne.getQuantite())) {
                 throw new IllegalArgumentException(
-                    "Stock insuffisant pour le produit ID: " + ligne.getProduitId()
+                    "Stock insuffisant pour le produit ID: " + ligne.getIdProd()
                 );
             }
         }
         
-        // Ensuite diminuer le stock
+        // Ensuite diminuer le stock et créer les mouvements
         for (LigneCommande ligne : lignes) {
-            stockDAO.updateStock(ligne);
+            // Récupérer le produit
+            Produit produit = produitDAO.findById(ligne.getIdProd());
+            
+            // Diminuer la quantité en stock
+            int nouvelleQuantite = produit.getStockActuel()- ligne.getQuantite();
+            produit.setStockActuel(nouvelleQuantite);
+            produitDAO.updateProduit(produit);
+            
+            // Créer un mouvement de sortie
+            MouvementStock mouvement = new MouvementStock();
+            mouvement.setTypeMouv(TypeMouvement.SORTIE.name());
+            mouvement.setIdProd(ligne.getIdProd());
+            mouvement.setQuantite(ligne.getQuantite());
+            mouvement.setDateMouv(new Date());
+            mouvement.setMotif("Validation commande " + commandeId);
+            
+            stockDAO.insertStock(mouvement);
         }
         
         // Changer le statut
         commande.setEtat(EtatCommande.VALIDEE);
         commandeDAO.update(commande);
     }
-    
 }

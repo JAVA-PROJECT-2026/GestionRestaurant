@@ -10,6 +10,7 @@ import main.model.entite.enums.TypeMouvement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import main.model.entite.Produit;
 
 /**
  * DAO pour la gestion des mouvements de stock
@@ -142,7 +143,6 @@ public class StockDAO {
      * @return true si la mise à jour a réussi
      */
     public boolean updateStock(MouvementStock stock) {
-        // ✅ CORRIGÉ: table MouvementStock + syntaxe SQL correcte
         String sql = "UPDATE MouvementStock SET typeMouv = ?, idProd = ?, quantite = ?, dateMouv = ?, motif = ? WHERE idMouv = ?";
         
         try (Connection conn = DatabaseConnection.getConnection(); 
@@ -309,6 +309,20 @@ public class StockDAO {
         
         return stocks;
     }
+    
+    /**
+     * Vérifier si un produit a suffisamment de stock
+     * @param idProd L'ID du produit
+     * @param qte La quantité demandée
+     * @return true si le stock est suffisant
+     */
+    public boolean hasEnoughStock(String idProd, int qte) {
+        ProduitDAO produitDAO = new ProduitDAO();
+        Produit p = produitDAO.findById(idProd);
+        
+        if (p != null && p.getStockActuel()>= qte) {
+            return true;
+        }
+        return false;
+    }
 }
-
-

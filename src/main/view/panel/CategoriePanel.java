@@ -4,17 +4,27 @@
  */
 package main.view.panel;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import main.controller.CategorieController;
+import main.model.entite.Categorie;
+
 /**
  *
  * @author Ali Barry
  */
 public class CategoriePanel extends javax.swing.JPanel {
+    private CategorieController categorieController;
 
     /**
      * Creates new form CategoriePanel
      */
     public CategoriePanel() {
         initComponents();
+        categorieController = new CategorieController();
+        chargerCategories();
+
     }
 
     /**
@@ -27,33 +37,275 @@ public class CategoriePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        libelle = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        description$ = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(1122, 910));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("GESTION CATEGORIES");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "CODE CATEGORIE", "NOM DE LA CATEGORIE", "DESCRIPTION DE LA CATEGORIE", "NOMBREDE PRODUITS"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("AJOUTER UNE NOUVELLE CATEGORIE");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setText("LIBELLE DE LA CATEGORIE : ");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel4.setText("DESCRIPTION DE LA CATEGORIE : ");
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setText("ENREGISTRER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setText("SUPPRIMER");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(libelle))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(description$)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 230, Short.MAX_VALUE)))))
+                .addGap(14, 14, 14)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(libelle, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(description$, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(336, 336, 336)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(382, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(368, 368, 368)
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+        // Récupérer le libellé
+            String libelleCategorie = libelle.getText().trim();
+            String descriptionCategorie = description$.getText().trim();
+        
+        // Validation
+            if (libelleCategorie.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                    "Veuillez saisir le libellé de la catégorie",
+                    "Champ obligatoire",
+                    JOptionPane.WARNING_MESSAGE);
+                libelle.requestFocus();
+                return;
+            }
+        
+        // Appel du controller
+            String resultat = categorieController.ajouterCategorie(libelleCategorie, descriptionCategorie);
+        
+        // Gestion du résultat
+            if ("OK".equals(resultat)) {
+                JOptionPane.showMessageDialog(this,
+                    "Catégorie ajoutée avec succès !",
+                    "Succès",
+                    JOptionPane.INFORMATION_MESSAGE);
+            
+            // Vider le formulaire
+                viderFormulaire();
+            
+            // Recharger la liste
+                chargerCategories();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    resultat,
+                    "Erreur",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur : " + e.getMessage(),
+                "Erreur",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            int selectedRow = jTable1.getSelectedRow();
+        
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this,
+                    "Veuillez sélectionner une catégorie à supprimer",
+                    "Aucune sélection",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+            }
+        
+            String idCat = (String) jTable1.getValueAt(selectedRow, 0);
+            String libelle = (String) jTable1.getValueAt(selectedRow, 1);
+        
+            int confirmation = JOptionPane.showConfirmDialog(this,
+                "Voulez-vous vraiment supprimer la catégorie '" + libelle + "' ?",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        
+            if (confirmation == JOptionPane.YES_OPTION) {
+                String resultat = categorieController.supprimerCategorie(idCat);
+            
+                if ("OK".equals(resultat)) {
+                    JOptionPane.showMessageDialog(this,
+                        "Catégorie supprimée avec succès !",
+                        "Succès",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    chargerCategories();
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                        resultat,
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur : " + e.getMessage(),
+                "Erreur",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField description$;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField libelle;
     // End of variables declaration//GEN-END:variables
+
+/**
+ * Charger toutes les catégories dans le tableau
+ */
+    private void chargerCategories() {
+        try {
+            List<Categorie> listeCategories = categorieController.listerToutesLesCategories();
+        
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+        
+            for (Categorie c : listeCategories) {
+                Object[] row = new Object[4];
+                row[0] = c.getIdCat();              // Code catégorie
+                row[1] = c.getLibelle();            // Nom
+                row[2] = c.getDescription();                     // Description (pas dans l'entité)
+                row[3] = 0;                         // Nombre de produits (à implémenter)
+            
+                model.addRow(row);
+            }
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur lors du chargement : " + e.getMessage(),
+                "Erreur",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
+/**
+ * Vider le formulaire
+ */
+    private void viderFormulaire() {
+        libelle.setText("");
+        description$.setText("");
+        libelle.requestFocus();
+    }
 }

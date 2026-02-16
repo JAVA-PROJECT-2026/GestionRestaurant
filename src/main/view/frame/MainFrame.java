@@ -33,12 +33,12 @@ public class MainFrame extends javax.swing.JFrame {
         int height = (int) (screenSize.height * 0.8);
         this.setSize(width, height);
 
-        // 3. Centrer la fenêtre
+        /*// 3. Centrer la fenêtre
         this.setLocationRelativeTo(null);
         javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane();
         scrollPane.setViewportView(containerPanel);
 
-        // 3. Configuration : barre verticale si besoin, jamais d'horizontale
+        3. Configuration : barre verticale si besoin, jamais d'horizontale
         scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -48,7 +48,23 @@ public class MainFrame extends javax.swing.JFrame {
         this.getContentPane().add(scrollPane, java.awt.BorderLayout.CENTER);
 
         this.revalidate();
+        this.repaint();*/
+        
+        this.getContentPane().remove(containerPanel);
+        
+        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(containerPanel);
+        
+        scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        scrollPane.setBorder(null);
+
+        this.getContentPane().add(scrollPane, java.awt.BorderLayout.CENTER);
+        
+        this.revalidate();
         this.repaint();
+    
     }
 
     /**
@@ -407,6 +423,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
+                
             }
         });
     }

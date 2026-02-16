@@ -268,7 +268,7 @@ public class DashboardPanel extends javax.swing.JPanel {
 
     private void chargerProduitsEnAlerte() {
         try{
-            List<Produit> produitsAlerte = produitController.listerProduitsEnAlerte();
+            List<Produit> produitsAlerte = produitController.obtenirProduitsEnAlerte();
             
             DefaultTableModel model = (DefaultTableModel) tableProduitEnAlerte.getModel();
             

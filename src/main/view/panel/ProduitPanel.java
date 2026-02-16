@@ -371,7 +371,7 @@ public class ProduitPanel extends javax.swing.JPanel {
     private void chargerProduits() {
     try {
         // Récupérer tous les produits via le controller
-        List<Produit> listeProduits = produitController.listerTousLesProduits();
+        List<Produit> listeProduits = produitController.obtenirTousProduits();
         
         // Obtenir le modèle du tableau
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();

@@ -4,7 +4,7 @@
  */
 package main.controller;
 
-<<<<<<< HEAD
+
 import main.model.dao.CommandeDAO;
 import main.model.dao.LigneCommandeDAO;
 import main.model.dao.StockDAO;
@@ -19,8 +19,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Date;
 import main.model.entite.enums.EtatCommande;
-=======
->>>>>>> 63fdc4a (modification model)
+
 
 /**
  * Controller pour gérer la logique métier des commandes
@@ -192,5 +191,22 @@ public class CommandeController {
         // Changer le statut
         commande.setEtat(EtatCommande.VALIDEE);
         commandeDAO.update(commande);
+    }
+
+    /**
+    * Obtenir le chiffre d'affaires total (commandes validées)
+    * @return Le chiffre d'affaires total
+    */
+    public double getChiffreAffairesTotal() {
+        return commandeDAO.getChiffreAffairesTotal();
+    }
+
+    /**
+    * Compter le nombre de commandes par état
+    * @param etat L'état des commandes à compter
+    * @return Le nombre de commandes
+     */
+    public int compterCommandesParEtat(EtatCommande etat) {
+        return commandeDAO.countByEtat(etat);
     }
 }

@@ -4,6 +4,7 @@
  */
 package main.controller;
 
+<<<<<<< HEAD
 import main.model.dao.CommandeDAO;
 import main.model.dao.LigneCommandeDAO;
 import main.model.dao.StockDAO;
@@ -18,6 +19,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Date;
 import main.model.entite.enums.EtatCommande;
+=======
+>>>>>>> 63fdc4a (modification model)
 
 /**
  * Controller pour gérer la logique métier des commandes

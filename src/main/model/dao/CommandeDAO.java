@@ -3,14 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.model.dao;
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> 9188760 (Ajout DAO commande)
 import main.util.DatabaseConnection;
-=======
->>>>>>> 38fb5e7 (Ajout DAO commande)
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

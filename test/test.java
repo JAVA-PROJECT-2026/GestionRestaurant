@@ -2,6 +2,7 @@
 import main.model.entite.Categorie;
 import main.model.entite.Utilisateur;
 import main.model.dao.CategorieDAO;
+import main.model.dao.UtilisateurDAO;
 
 public class test {
     public static void main(String[] args) {
@@ -13,7 +14,7 @@ public class test {
         Utilisateur u = new Utilisateur("admin", "1234");
         userDao.insert(u);
 
-        System.out.println("Utilisateur ajouté : " + u.getLogin());
+        System.out.println("Utilisateur ajouté : " + u.getEmail());
 
         // Test Categorie
         Categorie c = new Categorie("Boissons");

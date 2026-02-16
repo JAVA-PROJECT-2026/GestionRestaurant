@@ -8,12 +8,12 @@ package main.view.panel;
  *
  * @author Ali Barry
  */
-public class StockPanel extends javax.swing.JPanel {
+public class CommandePanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form StockPanel
+     * Creates new form CommandePanel
      */
-    public StockPanel() {
+    public CommandePanel() {
         initComponents();
     }
 
@@ -29,26 +29,27 @@ public class StockPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
+        setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1122, 910));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("GESTION STOCK");
+        jLabel1.setText("GESTION COMMANDES");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(291, 291, 291)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(500, Short.MAX_VALUE))
+                .addGap(255, 255, 255)
+                .addComponent(jLabel1)
+                .addContainerGap(437, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(372, 372, 372)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addGap(354, 354, 354)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(314, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

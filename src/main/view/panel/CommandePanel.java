@@ -5,40 +5,65 @@
 package main.view.panel;
 
 import java.awt.Color;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import main.controller.CommandeController;
+import main.controller.ProduitController;
+import main.model.entite.Commande;
+import main.model.entite.Produit;
+import main.model.dao.CommandeDAO;
 
 /**
  *
  * @author Ali Barry
  */
 public class CommandePanel extends javax.swing.JPanel {
-
+    private final CommandeController commandeController;
+    private final ProduitController produitController;
+    private DefaultTableModel modelLignes; // tableau temporaire des produits ajoutés
+    private javax.swing.JTable lignesTable; 
     /**
      * Creates new form CommandePanel
      */
     public CommandePanel() {
         initComponents();
+        commandeController = new CommandeController();
+        produitController  = new ProduitController();
+
+        chargerProduitsDansCombo();
+        initialiserTableauLignes();
+        chargerCommandes();
+        appliquerStyleTableau();
+        
+        vider.addActionListener(e -> viderFormulaire());
+        validerlignecommande.addActionListener(e -> ajouterLigneCommande());
+        rechercher.addActionListener(e -> rechercherCommande());
+        
+        jPanel1.validate();
+        jPanel2.repaint();
         
         cmdTable.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24));
         cmdTable.getTableHeader().setBackground(Color.BLUE); // Ton vert
         cmdTable.getTableHeader().setForeground(java.awt.Color.BLACK);
-        cmdTable.setRowHeight(50); // Lignes plus spacieuses
+        cmdTable.setRowHeight(50); 
         cmdTable.setSelectionBackground(new java.awt.Color(51, 153, 255)); 
 
-        // 2. Supprimer les lignes de grille moches
+            
         cmdTable.setShowGrid(false);
         cmdTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
         cmdTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
 
-        // 3. Centrer le texte dans les colonnes
+        
         javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
 
-        // On applique le centrage à chaque colonne
+        
         for (int i = 0; i < cmdTable.getColumnCount(); i++) {
             cmdTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
 
-        // 4. Supprimer la bordure du ScrollPane qui entoure la table
+        
         cmdTable.setBorder(null);
     }
 
@@ -56,10 +81,7 @@ public class CommandePanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
         jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -67,12 +89,15 @@ public class CommandePanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
+        vider = new javax.swing.JButton();
+        validerlignecommande = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         cmdTable = new javax.swing.JTable();
+        rechercher = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setName(""); // NOI18N
@@ -90,24 +115,12 @@ public class CommandePanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jLabel4.setText("SELECTIONNER LE PRODUIT :");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
-
         jButton1.setBackground(new java.awt.Color(35, 166, 97));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("COMMANDER");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton3.setBackground(new java.awt.Color(153, 153, 153));
-        jToggleButton3.setText("Vider");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
             }
         });
 
@@ -119,16 +132,18 @@ public class CommandePanel extends javax.swing.JPanel {
 
         jLabel7.setText("Quantité de produit :");
 
+        vider.setBackground(new java.awt.Color(153, 153, 153));
+        vider.setText("vider");
+
+        validerlignecommande.setBackground(new java.awt.Color(153, 153, 153));
+        validerlignecommande.setText("valider");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -137,30 +152,42 @@ public class CommandePanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSpinner1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(vider, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                        .addComponent(validerlignecommande, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(104, 104, 104)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(64, 64, 64)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                    .addComponent(jTextField3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                            .addComponent(jTextField3))
+                        .addContainerGap(12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -174,15 +201,13 @@ public class CommandePanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                    .addComponent(vider, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(validerlignecommande, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76))
         );
-
-        jToggleButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jToggleButton1.setText("Rechercher");
 
         jToggleButton2.setBackground(new java.awt.Color(255, 102, 102));
         jToggleButton2.setText("Supprimer");
@@ -220,7 +245,7 @@ public class CommandePanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,17 +255,20 @@ public class CommandePanel extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        rechercher.setBackground(new java.awt.Color(153, 153, 153));
+        rechercher.setText("rechercher");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 105, Short.MAX_VALUE)
+                .addGap(0, 96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -250,7 +278,7 @@ public class CommandePanel extends javax.swing.JPanel {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,27 +288,25 @@ public class CommandePanel extends javax.swing.JPanel {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
+        supprimerCommande();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
-
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        validerCommandeComplete();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -288,6 +314,7 @@ public class CommandePanel extends javax.swing.JPanel {
     private javax.swing.JTable cmdTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -297,15 +324,342 @@ public class CommandePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JButton rechercher;
+    private javax.swing.JButton validerlignecommande;
+    private javax.swing.JButton vider;
     // End of variables declaration//GEN-END:variables
+
+
+   
+    private void chargerProduitsDansCombo() {
+        jComboBox2.removeAllItems();
+        List<Produit> produits = produitController.obtenirTousProduits();
+        for (Produit p : produits) {
+            jComboBox2.addItem(p.getNom());
+        }
+    }
+
+   
+    private Produit getProduitSelectionne() {
+        int index = jComboBox2.getSelectedIndex();
+        if (index == -1) return null;
+        return produitController.obtenirTousProduits().get(index);
+    }
+
+    
+    private void initialiserTableauLignes() {
+    modelLignes = new DefaultTableModel(
+        new String[]{"idProd", "Produit", "Prix Unitaire", "Quantité", "Sous-total"},
+        0
+    ) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+
+    lignesTable = new javax.swing.JTable(modelLignes);
+    lignesTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
+    lignesTable.setRowHeight(30);
+    lignesTable.setShowGrid(true);
+    lignesTable.setGridColor(Color.LIGHT_GRAY);
+
+    
+    lignesTable.getColumnModel().getColumn(0).setMinWidth(0);
+    lignesTable.getColumnModel().getColumn(0).setMaxWidth(0);
+    lignesTable.getColumnModel().getColumn(0).setWidth(0);
+
+    javax.swing.JScrollPane scrollLignes = new javax.swing.JScrollPane(lignesTable);
+    scrollLignes.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY));
+
+    
+    jTextField2.setVisible(false);
+    jPanel1.setLayout(null); // ⚠️ temporairement null pour positionner librement
+
+
+    jTextField2.addComponentListener(new java.awt.event.ComponentAdapter() {
+        @Override
+        public void componentResized(java.awt.event.ComponentEvent e) {
+            // S'exécute quand jTextField2 a ses vraies dimensions
+            java.awt.Rectangle bounds = jTextField2.getBounds();
+            scrollLignes.setBounds(bounds);
+            if (scrollLignes.getParent() == null) {
+                jPanel1.add(scrollLignes);
+                jPanel1.setComponentZOrder(scrollLignes, 0);
+                jPanel1.revalidate();
+                jPanel1.repaint();
+            }
+        }
+    });
+
+    
+    jTextField3.setText("0.00 FCFA");
+    jTextField3.setEditable(false);
+    jTextField3.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+}
+
+    
+    private void chargerCommandes() {
+        try {
+            List<Commande> commandes = commandeController.getAllCommandes();
+
+            DefaultTableModel model = new DefaultTableModel(
+                new String[]{"idCom", "NUMERO", "DATE", "STATUS", "TOTAL"},
+                0
+            ) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+
+            for (Commande c : commandes) {
+                model.addRow(new Object[]{
+                    c.getIdCom(),
+                    c.getIdCom(),
+                    c.getDateCommande(),
+                    c.getEtat().name(),
+                    String.format("%.2f FCFA", c.getTotalCommande())
+                });
+            }
+
+            cmdTable.setModel(model);
+
+            // Cacher idCom
+            cmdTable.getColumnModel().getColumn(0).setMinWidth(0);
+            cmdTable.getColumnModel().getColumn(0).setMaxWidth(0);
+            cmdTable.getColumnModel().getColumn(0).setWidth(0);
+
+            appliquerStyleTableau();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur chargement commandes : " + e.getMessage(),
+                "Erreur", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
+    
+    private void ajouterLigneCommande() {
+        try {
+            Produit produit = getProduitSelectionne();
+
+            if (produit == null) {
+                JOptionPane.showMessageDialog(this,
+                    "Veuillez sélectionner un produit",
+                    "Aucun produit", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int quantite = (Integer) jSpinner1.getValue();
+            if (quantite <= 0) {
+                JOptionPane.showMessageDialog(this,
+                    "La quantité doit être supérieure à 0",
+                    "Quantité invalide", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            
+            for (int i = 0; i < modelLignes.getRowCount(); i++) {
+                if (modelLignes.getValueAt(i, 0).equals(produit.getIdProd())) {
+                    JOptionPane.showMessageDialog(this,
+                        "Ce produit est déjà dans la commande",
+                        "Doublon", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+
+            double sousTotal = produit.getPrixVente() * quantite;
+
+            modelLignes.addRow(new Object[]{
+                produit.getIdProd(),
+                produit.getNom(),
+                produit.getPrixVente(),
+                quantite,
+                sousTotal
+            });
+
+            mettreAJourTotal();
+            jSpinner1.setValue(1);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur : " + e.getMessage(),
+                "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
+    private void validerCommandeComplete() {
+        try {
+            if (modelLignes.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this,
+                    "Ajoutez au moins un produit avant de commander",
+                    "Commande vide", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int confirmation = JOptionPane.showConfirmDialog(this,
+                "Confirmer la commande ? Le stock sera mis à jour.",
+                "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            if (confirmation != JOptionPane.YES_OPTION) return;
+
+            
+            String idCom = commandeController.creerCommande();
+
+            
+            for (int i = 0; i < modelLignes.getRowCount(); i++) {
+                String idProd = String.valueOf(modelLignes.getValueAt(i, 0));
+                double prix   = (double) modelLignes.getValueAt(i, 2);
+                int qte       = (int)    modelLignes.getValueAt(i, 3);
+                commandeController.ajouterProduitCommande(idCom, idProd, qte, prix);
+            }
+
+            
+            commandeController.validerCommande(idCom);
+
+            JOptionPane.showMessageDialog(this,
+                "Commande validée avec succès ! Stock mis à jour.",
+                "Succès", JOptionPane.INFORMATION_MESSAGE);
+
+            viderFormulaire();
+            chargerCommandes();
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this,
+                e.getMessage(),
+                "Erreur métier", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur : " + e.getMessage(),
+                "Erreur", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
+    
+    private void viderFormulaire() {
+        modelLignes.setRowCount(0);
+        jTextField3.setText("0.00 FCFA");
+        jSpinner1.setValue(1);
+        if (jComboBox2.getItemCount() > 0) jComboBox2.setSelectedIndex(0);
+    }
+
+    
+    private void supprimerCommande() {
+        try {
+            int selectedRow = cmdTable.getSelectedRow();
+
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this,
+                    "Veuillez sélectionner une commande",
+                    "Aucune sélection", JOptionPane.WARNING_MESSAGE);
+                jToggleButton2.setSelected(false);
+                return;
+            }
+
+            String statut = String.valueOf(cmdTable.getValueAt(selectedRow, 3));
+            if ("VALIDEE".equals(statut)) {
+                JOptionPane.showMessageDialog(this,
+                    "Impossible de supprimer une commande déjà validée",
+                    "Suppression impossible", JOptionPane.ERROR_MESSAGE);
+                jToggleButton2.setSelected(false);
+                return;
+            }
+
+            String idCom = String.valueOf(cmdTable.getValueAt(selectedRow, 0));
+
+            int confirmation = JOptionPane.showConfirmDialog(this,
+                "Voulez-vous vraiment supprimer cette commande ?",
+                "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            if (confirmation == JOptionPane.YES_OPTION) {
+                Commande cmd = commandeController.getCommandeById(idCom);
+                CommandeDAO dao = new CommandeDAO();
+                boolean ok = dao.delete(cmd);
+
+                if (ok) {
+                    JOptionPane.showMessageDialog(this,
+                        "Commande supprimée avec succès !",
+                        "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    chargerCommandes();
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                        "Erreur lors de la suppression",
+                        "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            jToggleButton2.setSelected(false);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur : " + e.getMessage(),
+                "Erreur", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
+    
+    private void rechercherCommande() {
+        String terme = jTextField1.getText().trim().toLowerCase();
+        try {
+            List<Commande> toutes = commandeController.getAllCommandes();
+            DefaultTableModel model = (DefaultTableModel) cmdTable.getModel();
+            model.setRowCount(0);
+
+            for (Commande c : toutes) {
+                if (terme.isEmpty() || c.getIdCom().toLowerCase().contains(terme)
+                        || c.getEtat().name().toLowerCase().contains(terme)) {
+                    model.addRow(new Object[]{
+                        c.getIdCom(),
+                        c.getIdCom(),
+                        c.getDateCommande(),
+                        c.getEtat().name(),
+                        String.format("%.2f FCFA", c.getTotalCommande())
+                    });
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur : " + e.getMessage(),
+                "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
+    private void mettreAJourTotal() {
+        double total = 0;
+        for (int i = 0; i < modelLignes.getRowCount(); i++) {
+            total += (double) modelLignes.getValueAt(i, 4);
+        }
+        jTextField3.setText(String.format("%.2f FCFA", total));
+    }
+
+    
+    private void appliquerStyleTableau() {
+        cmdTable.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24));
+        cmdTable.getTableHeader().setBackground(Color.BLUE);
+        cmdTable.getTableHeader().setForeground(java.awt.Color.BLACK);
+        cmdTable.setRowHeight(50);
+        cmdTable.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        cmdTable.setShowGrid(false);
+        cmdTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        cmdTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        for (int i = 0; i < cmdTable.getColumnCount(); i++) {
+            cmdTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        jScrollPane3.setBorder(null);
+    }
 }

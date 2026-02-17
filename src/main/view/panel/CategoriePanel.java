@@ -4,6 +4,7 @@
  */
 package main.view.panel;
 
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +25,29 @@ public class CategoriePanel extends javax.swing.JPanel {
         initComponents();
         categorieController = new CategorieController();
         chargerCategories();
+        
+        tabCategorie.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24));
+        tabCategorie.getTableHeader().setBackground(Color.BLUE); // Ton vert
+        tabCategorie.getTableHeader().setForeground(java.awt.Color.BLACK);
+        tabCategorie.setRowHeight(50); // Lignes plus spacieuses
+        tabCategorie.setSelectionBackground(new java.awt.Color(51, 153, 255)); 
+
+        // 2. Supprimer les lignes de grille moches
+        tabCategorie.setShowGrid(false);
+        tabCategorie.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tabCategorie.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+
+        // 3. Centrer le texte dans les colonnes
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+
+        // On applique le centrage à chaque colonne
+        for (int i = 0; i < tabCategorie.getColumnCount(); i++) {
+            tabCategorie.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
+        // 4. Supprimer la bordure du ScrollPane qui entoure la table
+        jScrollPane1.setBorder(null);
 
     }
 
@@ -38,24 +62,27 @@ public class CategoriePanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabCategorie = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         libelle = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         description$ = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        enregistrer = new javax.swing.JButton();
+        vider = new javax.swing.JButton();
+        suprimer = new javax.swing.JButton();
+        rechercherCateg = new javax.swing.JTextField();
+        btnRecherche = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
-        setPreferredSize(new java.awt.Dimension(1122, 910));
+        setPreferredSize(new java.awt.Dimension(1548, 1327));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("GESTION CATEGORIES");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabCategorie.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -66,31 +93,37 @@ public class CategoriePanel extends javax.swing.JPanel {
                 "CODE CATEGORIE", "NOM DE LA CATEGORIE", "DESCRIPTION DE LA CATEGORIE", "NOMBREDE PRODUITS"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabCategorie);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("AJOUTER UNE NOUVELLE CATEGORIE");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("LIBELLE DE LA CATEGORIE : ");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        libelle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("DESCRIPTION DE LA CATEGORIE : ");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("ENREGISTRER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        description$.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        enregistrer.setBackground(new java.awt.Color(35, 166, 97));
+        enregistrer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        enregistrer.setText("ENREGISTRER");
+        enregistrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                enregistrerActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("SUPPRIMER");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        vider.setBackground(new java.awt.Color(153, 153, 153));
+        vider.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        vider.setText("VIDER");
+        vider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                viderActionPerformed(evt);
             }
         });
 
@@ -110,10 +143,10 @@ public class CategoriePanel extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(description$)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 230, Short.MAX_VALUE)))))
-                .addGap(14, 14, 14)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(enregistrer, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
+                                .addComponent(vider, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(114, 114, 114))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,44 +154,91 @@ public class CategoriePanel extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(libelle, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(libelle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(description$, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                    .addComponent(description$, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(enregistrer, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vider, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
+
+        suprimer.setBackground(new java.awt.Color(255, 102, 102));
+        suprimer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        suprimer.setText("SUPPRIMER");
+        suprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suprimerActionPerformed(evt);
+            }
+        });
+
+        rechercherCateg.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rechercherCateg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rechercherCategActionPerformed(evt);
+            }
+        });
+
+        btnRecherche.setBackground(new java.awt.Color(153, 153, 153));
+        btnRecherche.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRecherche.setText("RECHERCHER");
+        btnRecherche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRechercheActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(541, 541, 541)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(159, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rechercherCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(btnRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(suprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)))
+                        .addGap(101, 101, 101))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(suprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rechercherCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         // TODO add your handling code here:
         
         try {
@@ -205,13 +285,18 @@ public class CategoriePanel extends javax.swing.JPanel {
                 JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_enregistrerActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void viderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viderActionPerformed
         // TODO add your handling code here:
+        viderFormulaire();
+    }//GEN-LAST:event_viderActionPerformed
 
+    private void suprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suprimerActionPerformed
+        // TODO add your handling code here:
+        
         try {
-            int selectedRow = jTable1.getSelectedRow();
+            int selectedRow = tabCategorie.getSelectedRow();
         
             if (selectedRow == -1) {
                 JOptionPane.showMessageDialog(this,
@@ -221,8 +306,8 @@ public class CategoriePanel extends javax.swing.JPanel {
             return;
             }
         
-            String idCat = (String) jTable1.getValueAt(selectedRow, 0);
-            String libelle = (String) jTable1.getValueAt(selectedRow, 1);
+            String idCat = (String) tabCategorie.getValueAt(selectedRow, 0);
+            String libelle = (String) tabCategorie.getValueAt(selectedRow, 1);
         
             int confirmation = JOptionPane.showConfirmDialog(this,
                 "Voulez-vous vraiment supprimer la catégorie '" + libelle + "' ?",
@@ -245,7 +330,8 @@ public class CategoriePanel extends javax.swing.JPanel {
                         JOptionPane.ERROR_MESSAGE);
                 }
             }
-        
+            viderFormulaire();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
                 "Erreur : " + e.getMessage(),
@@ -253,22 +339,48 @@ public class CategoriePanel extends javax.swing.JPanel {
                 JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+    }//GEN-LAST:event_suprimerActionPerformed
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechercheActionPerformed
+        // TODO add your handling code here:
+        String terme = rechercherCateg.getText().trim().toLowerCase();
+        try {
+            List<Categorie> toutes = categorieController.listerToutesLesCategories();
+            DefaultTableModel model = (DefaultTableModel) tabCategorie.getModel();
+            model.setRowCount(0);
+            for (Categorie c : toutes) {
+                if (terme.isEmpty()
+                        || c.getLibelle().toLowerCase().contains(terme)
+                        || (c.getDescription() != null && c.getDescription().toLowerCase().contains(terme))) {
+                    model.addRow(new Object[]{c.getIdCat(), c.getLibelle(), c.getDescription(), 0});
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erreur : " + e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnRechercheActionPerformed
+
+    private void rechercherCategActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercherCategActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rechercherCategActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRecherche;
     private javax.swing.JTextField description$;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton enregistrer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField libelle;
+    private javax.swing.JTextField rechercherCateg;
+    private javax.swing.JButton suprimer;
+    private javax.swing.JTable tabCategorie;
+    private javax.swing.JButton vider;
     // End of variables declaration//GEN-END:variables
 
 /**
@@ -278,18 +390,51 @@ public class CategoriePanel extends javax.swing.JPanel {
         try {
             List<Categorie> listeCategories = categorieController.listerToutesLesCategories();
         
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.setRowCount(0);
+            DefaultTableModel model = new DefaultTableModel(
+                new String[]{"CODE CATEGORIE", "NOM DE LA CATEGORIE", "DESCRIPTION DE LA CATEGORIE", "NOMBRE DE PRODUITS"},
+                0
+            ) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return column == 1 || column == 2; // ✅ Seulement libellé et description
+                }
+            };
+
         
             for (Categorie c : listeCategories) {
                 Object[] row = new Object[4];
-                row[0] = c.getIdCat();              // Code catégorie
-                row[1] = c.getLibelle();            // Nom
-                row[2] = c.getDescription();                     // Description (pas dans l'entité)
-                row[3] = 0;                         // Nombre de produits (à implémenter)
+                row[0] = c.getIdCat();              
+                row[1] = c.getLibelle();            
+                row[2] = c.getDescription();
+                row[3] = categorieController.compterProduitParCategorie(String.valueOf(c.getIdCat()));                         
             
                 model.addRow(row);
             }
+            
+            tabCategorie.setModel(model);
+            
+            model.addTableModelListener(e ->{
+                int row = e.getFirstRow();
+                int col = e.getColumn();
+                
+                if (e.getType() == javax.swing.event.TableModelEvent.UPDATE && col != -1) {
+                    String idCat       = String.valueOf(model.getValueAt(row, 0));
+                    String nouveauLibelle     = String.valueOf(model.getValueAt(row, 1));
+                    String nouvelleDescription = String.valueOf(model.getValueAt(row, 2));
+
+                    String resultat = categorieController.modifierCategorie(idCat, nouveauLibelle, nouvelleDescription);
+
+                    if (!"OK".equals(resultat)) {
+                        JOptionPane.showMessageDialog(this,
+                        "Erreur lors de la modification : " + resultat,
+                            "Erreur",
+                            JOptionPane.ERROR_MESSAGE);
+                        chargerCategories(); // ✅ Recharger pour annuler le changement affiché
+                    }
+                }
+                
+            });
+            appliquerStyleTableau();
         
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
@@ -307,5 +452,23 @@ public class CategoriePanel extends javax.swing.JPanel {
         libelle.setText("");
         description$.setText("");
         libelle.requestFocus();
+    }
+
+    private void appliquerStyleTableau() {
+        tabCategorie.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24));
+        tabCategorie.getTableHeader().setBackground(Color.BLUE);
+        tabCategorie.getTableHeader().setForeground(java.awt.Color.BLACK);
+        tabCategorie.setRowHeight(50);
+        tabCategorie.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        tabCategorie.setShowGrid(false);
+        tabCategorie.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tabCategorie.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        for (int i = 0; i < tabCategorie.getColumnCount(); i++) {
+            tabCategorie.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        jScrollPane1.setBorder(null);
     }
 }

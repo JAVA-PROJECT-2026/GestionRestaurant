@@ -98,4 +98,21 @@ public class CategorieDAO {
         return categories;
     }
     
+    public int compterProduitParCategorie(String idCat) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM Produit WHERE idCat = ?"; 
+    
+        try (Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) { 
+            ps.setString(1, idCat);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+    
 }

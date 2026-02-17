@@ -123,4 +123,24 @@ public class CategorieController {
             return "Erreur : " + e.getMessage();
         }
     }
+    
+    public int compterProduitParCategorie(String idCat) {
+        return categorieDAO.compterProduitParCategorie(idCat);
+    }
+    
+    
+    public String modifierCategorie(String idCat, String libelle, String description) {
+        try {
+            Categorie c = new Categorie();
+            c.setIdCat(idCat);
+            c.setLibelle(libelle);
+            c.setDescription(description);
+        
+            boolean ok = categorieDAO.update(c);
+            return ok ? "OK" : "Échec de la mise à jour";
+        } catch (Exception e) {
+            return "Erreur : " + e.getMessage();
+        }
+    }
+    
 }

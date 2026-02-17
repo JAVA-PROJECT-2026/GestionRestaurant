@@ -107,7 +107,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         btnCategorie = new javax.swing.JButton();
         containerPanel = new javax.swing.JPanel();
-        dashboardPanel1 = new main.view.panel.DashboardPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("menuPrincipal"); // NOI18N
@@ -150,7 +149,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnDashboard.setText("  Dashboard");
         btnDashboard.setBorderPainted(false);
         btnDashboard.setContentAreaFilled(false);
-        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDashboard.setFocusPainted(false);
         btnDashboard.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +181,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCommande.setText("   Commandes");
         btnCommande.setBorderPainted(false);
         btnCommande.setContentAreaFilled(false);
-        btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCommande.setFocusPainted(false);
         btnCommande.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCommande.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +213,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnProduit.setText("   Produits");
         btnProduit.setBorderPainted(false);
         btnProduit.setContentAreaFilled(false);
-        btnProduit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProduit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProduit.setFocusPainted(false);
         btnProduit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnProduit.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +245,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCategorie.setText("    Catégories");
         btnCategorie.setBorderPainted(false);
         btnCategorie.setContentAreaFilled(false);
-        btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCategorie.setFocusPainted(false);
         btnCategorie.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCategorie.addActionListener(new java.awt.event.ActionListener() {
@@ -331,8 +330,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         containerPanel.setBackground(new java.awt.Color(204, 204, 204));
         containerPanel.setLayout(new java.awt.BorderLayout());
-        containerPanel.add(dashboardPanel1, java.awt.BorderLayout.CENTER);
-
         getContentPane().add(containerPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -396,7 +393,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnProduit;
     private javax.swing.JPanel containerPanel;
-    private main.view.panel.DashboardPanel dashboardPanel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

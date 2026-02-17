@@ -46,10 +46,10 @@ public class CommandePanel extends javax.swing.JPanel {
         
         jSpinner1.setValue(1);
         
-        JSpinner.DateEditor editor = new JSpinner.DateEditor(jSpinner2, "yyyy-MM-dd");
-        jSpinner2.setEditor(editor);
+        //JSpinner.DateEditor editor = new JSpinner.DateEditor(jSpinner2, "yyyy-MM-dd");
+        //jSpinner2.setEditor(editor);
         
-        ((JSpinner.DefaultEditor) jSpinner2.getEditor()).getTextField().setEditable(false);
+        //((JSpinner.DefaultEditor) jSpinner2.getEditor()).getTextField().setEditable(false);
 
         
         cmdTable.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24));
@@ -535,7 +535,7 @@ public class CommandePanel extends javax.swing.JPanel {
             if (confirmation != JOptionPane.YES_OPTION) return;
 
             
-            String idCom = commandeController.creerCommande();
+            String idCom = commandeController.creerCommande().getIdCom();
 
             
             for (int i = 0; i < modelLignes.getRowCount(); i++) {

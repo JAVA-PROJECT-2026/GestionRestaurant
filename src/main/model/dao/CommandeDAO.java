@@ -23,15 +23,14 @@ public class CommandeDAO {
      * @return true si l'insertion a réussi
      */
     public boolean insert(Commande commande) {
-        String sql = "INSERT INTO Commande (idCom, dateCommande, etat, total) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Commande (idCom, etat, total) VALUES (?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getConnection(); 
              PreparedStatement pst = conn.prepareStatement(sql)) {
             
-            pst.setString(1, commande.getIdCom());
-            pst.setTimestamp(2, new Timestamp(commande.getDateCommande().getTime()));
-            pst.setString(3, commande.getEtat().name());
-            pst.setDouble(4, commande.getTotalCommande());
+            pst.setString(0, commande.getIdCom());
+            pst.setString(1, commande.getEtat().name());
+            pst.setDouble(2, commande.getTotalCommande());
            
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;

@@ -63,12 +63,12 @@ public class CommandeController {
      * @return L'ID de la commande créée
      * @throws java.sql.SQLException
      */
-    public String creerCommande() throws SQLException{
+    public Commande creerCommande() throws SQLException{
         Commande commande = new Commande();
         commande.setTotalCommande(0.0);
         commande.setEtat(EtatCommande.EN_COURS);
         commandeDAO.insert(commande);
-        return commande.getIdCom();
+        return commande;
     }
     
     /**
@@ -132,6 +132,10 @@ public class CommandeController {
         }
         
         Commande commande = commandeDAO.findById(commandeId);
+        if (commande == null) {
+            throw new IllegalArgumentException(
+            "Commande Introuvable: " + commandeId);
+        }
         commande.setTotalCommande(total);
         commandeDAO.update(commande);
     }

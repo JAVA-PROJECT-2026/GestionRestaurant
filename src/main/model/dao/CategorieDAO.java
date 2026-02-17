@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.model.dao;
+import java.sql.Connection;
 import main.util.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;

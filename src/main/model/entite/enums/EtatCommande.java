@@ -8,8 +8,8 @@ package main.model.entite.enums;
  *
  * @author Ali Barry
  */
-public enum EtatCommande{
-    EN_COURS,
-    VALIDE,
-    ANNULER
+public enum EtatCommande {
+    EN_COURS,   // Commande en cours de préparation
+    VALIDEE,    // Commande terminée et payée (CORRIGÉ: était "VALIDE")
+    ANNULEE     // Commande annulée (CORRIGÉ: était "ANNULER")
 }

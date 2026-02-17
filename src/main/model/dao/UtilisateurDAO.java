@@ -3,136 +3,81 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.model.dao;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import main.util.DatabaseConnection;
-import main.model.entite.Utilisateur;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import main.model.entite.Utilisateur;
+import main.util.DatabaseConnection;
 /**
  *
- * @author isaac
+ * @author Isaac
  */
 public class UtilisateurDAO {
 
-    public void insert(Utilisateur utilisateur) {
-        String sql = "INSERT INTO Utilisateur (id, login, password) VALUES (?, ?, ?)";
-
+    // Vérifier si l'email + password correspondent à un utilisateur en base
+    public Utilisateur findByEmailAndPassword(String email, String password) {
+        String sql = "SELECT * FROM Utilisateur WHERE email = ? AND password = ?";
+        
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
+            
+            ps.setString(1, email);
+            ps.setString(2, password);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                Utilisateur u = new Utilisateur();
+                u.setId(rs.getString("id"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                return u;
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // aucun utilisateur trouvé
+    }
 
+    // Vérifier si un email existe déjà
+    public boolean emailExiste(String email) {
+        String sql = "SELECT COUNT(*) FROM Utilisateur WHERE email = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Insérer un nouvel utilisateur
+    public boolean insert(Utilisateur utilisateur) {
+        String sql = "INSERT INTO Utilisateur (id, email, password) VALUES (?, ?, ?)";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            
             ps.setString(1, utilisateur.getId());
-            ps.setString(2, utilisateur.getLogin());
+            ps.setString(2, utilisateur.getEmail());
             ps.setString(3, utilisateur.getPassword());
-
             ps.executeUpdate();
-
+            return true;
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-    }
-
-    public void update(Utilisateur utilisateur) {
-        String sql = "UPDATE Utilisateur SET login = ?, password = ? WHERE id = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, utilisateur.getLogin());
-            ps.setString(2, utilisateur.getPassword());
-            ps.setString(3, utilisateur.getId());
-
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void delete(String id) {
-        String sql = "DELETE FROM Utilisateur WHERE id = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, id);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Utilisateur findById(String id) {
-        String sql = "SELECT * FROM Utilisateur WHERE id = ?";
-        Utilisateur utilisateur = null;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, id);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                utilisateur = new Utilisateur();
-                utilisateur.setId(rs.getString("id"));
-                utilisateur.setLogin(rs.getString("login"));
-                utilisateur.setPassword(rs.getString("password"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return utilisateur;
-    }
-
-    public Utilisateur findByLogin(String login) {
-        String sql = "SELECT * FROM Utilisateur WHERE login = ?";
-        Utilisateur utilisateur = null;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, login);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                utilisateur = new Utilisateur();
-                utilisateur.setId(rs.getString("id"));
-                utilisateur.setLogin(rs.getString("login"));
-                utilisateur.setPassword(rs.getString("password"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return utilisateur;
-    }
-
-    public List<Utilisateur> findAll() {
-        List<Utilisateur> utilisateurs = new ArrayList<>();
-        String sql = "SELECT * FROM Utilisateur";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                Utilisateur utilisateur = new Utilisateur();
-                utilisateur.setId(rs.getString("id"));
-                utilisateur.setLogin(rs.getString("login"));
-                utilisateur.setPassword(rs.getString("password"));
-
-                utilisateurs.add(utilisateur);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return utilisateurs;
     }
 }
-

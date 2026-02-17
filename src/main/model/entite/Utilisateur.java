@@ -11,12 +11,12 @@ import java.util.UUID;
  */
 public class Utilisateur {
     private String id;
-    private String login;
+    private String email;
     private String password;
     
-    public Utilisateur(String login, String password){
+    public Utilisateur(String email, String password){
         this.id = UUID.randomUUID().toString();
-        this.login = login;
+        this.email = email;
         this.password = password;
     }
     
@@ -29,12 +29,12 @@ public class Utilisateur {
     public void setId(String id){
         this.id = id;
     }
-    public String getLogin(){
-        return this.login;
+    public String getEmail(){
+        return this.email;
     }
     
-    public void setLogin(String login){
-        this.login = login;   
+    public void setEmail(String email){
+        this.email = email;   
     }
     
     public String getPassword(){

@@ -294,7 +294,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="nomProd1" max="32767" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="enregistrer2" min="-2" pref="265" max="-2" attributes="0"/>
+                                  <Component id="rechercher" min="-2" pref="265" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="375" max="-2" attributes="0"/>
                                   <Component id="supprimerProduit" min="-2" pref="265" max="-2" attributes="0"/>
                               </Group>
@@ -314,7 +314,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="supprimerProduit" min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="enregistrer2" min="-2" pref="62" max="-2" attributes="0"/>
+                      <Component id="rechercher" min="-2" pref="62" max="-2" attributes="0"/>
                       <Component id="nomProd1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -417,7 +417,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="enregistrer2">
+        <Component class="javax.swing.JButton" name="rechercher">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -438,7 +438,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enregistrer2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rechercherActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

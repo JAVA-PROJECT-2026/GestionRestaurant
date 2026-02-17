@@ -73,9 +73,12 @@ public class UtilisateurDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
+
+            ps.executeUpdate();
             ps.setString(1, id);
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
+
 
         } catch (SQLException e) {
             System.err.println("Erreur lors de la suppression de l'utilisateur: " + e.getMessage());

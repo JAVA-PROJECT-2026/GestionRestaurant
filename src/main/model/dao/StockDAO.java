@@ -143,6 +143,7 @@ public class StockDAO {
      * @return true si la mise à jour a réussi
      */
     public boolean updateStock(MouvementStock stock) {
+
         String sql = "UPDATE MouvementStock SET typeMouv = ?, idProd = ?, quantite = ?, dateMouv = ?, motif = ? WHERE idMouv = ?";
         
         try (Connection conn = DatabaseConnection.getConnection(); 
@@ -326,3 +327,8 @@ public class StockDAO {
         return false;
     }
 }
+
+
+    
+    
+    

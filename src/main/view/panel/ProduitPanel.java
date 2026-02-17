@@ -40,6 +40,7 @@ public class ProduitPanel extends javax.swing.JPanel {
         // 2. Supprimer les lignes de grille moches
         listeTableProduit.setShowGrid(false);
         listeTableProduit.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        listeTableProduit.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
 
         // 3. Centrer le texte dans les colonnes
         javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
@@ -90,23 +91,23 @@ public class ProduitPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("GESTION DES PRODUITS");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Nom du produit ");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Prix du produit ");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Stock Actuel");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Seuil d'Alerte");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Catégorie");
 
@@ -122,6 +123,7 @@ public class ProduitPanel extends javax.swing.JPanel {
         jLabel7.setText("AJOUTER UN PRODUIT ");
 
         enregistrer.setBackground(new java.awt.Color(35, 166, 97));
+        enregistrer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         enregistrer.setText("ENREGISTRER");
         enregistrer.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, new java.awt.Color(153, 153, 153), java.awt.Color.gray, java.awt.Color.darkGray));
         enregistrer.addActionListener(new java.awt.event.ActionListener() {
@@ -218,17 +220,17 @@ public class ProduitPanel extends javax.swing.JPanel {
         listeTableProduit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         listeTableProduit.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nom du produit", "Prix Unitaire", "Stock Actuel", "Seuil d'Alerte"
+                "Nom du produit", "Prix Unitaire", "Catégorie", "Stock Actuel", "Seuil d'Alerte"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -268,7 +270,7 @@ public class ProduitPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,11 +434,12 @@ public class ProduitPanel extends javax.swing.JPanel {
         
         // Remplir le tableau avec les produits (4 colonnes seulement)
         for (Produit p : listeProduits) {
-            Object[] row = new Object[4];
+            Object[] row = new Object[5];
             row[0] = p.getNom();                // Nom du produit
             row[1] = p.getPrixVente();          // Prix Unitaire
-            row[2] = p.getStockActuel();        // Stock Actuel
-            row[3] = p.getSeuilAlerte();        // Seuil d'Alerte
+            row[2] = p.getCategorie().getLibelle(); // libelle de la catégorie
+            row[3] = p.getStockActuel();        // Stock Actuel
+            row[4] = p.getSeuilAlerte();        // Seuil d'Alerte
             
             model.addRow(row);
         }

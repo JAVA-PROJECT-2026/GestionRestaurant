@@ -4,6 +4,9 @@
  */
 package main.view.frame;
 
+import javax.swing.JOptionPane;
+import main.controller.LoginController;
+import main.model.entite.Utilisateur;
 import main.util.Utilis;
 
 /**
@@ -11,13 +14,13 @@ import main.util.Utilis;
  * @author DELL
  */
 public class LoginFrame extends javax.swing.JFrame {
-
+    private LoginController loginController;
     /**
      * Creates new form login
      */
     public LoginFrame() {
         initComponents();
-        
+        loginController = new LoginController();
         logo.setIcon(Utilis.resizeIcon("/resources/icons/chef.png", 70, 70));
     }
 
@@ -206,6 +209,45 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void seConnecterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seConnecterActionPerformed
         // TODO add your handling code here:
+        
+        String mail = email.getText().trim();
+        String pass = new String(motDePasse.getPassword()).trim();
+        
+        if(mail.isEmpty()){
+            JOptionPane.showMessageDialog(this,
+                    "Veuillez saisir votre email",
+                    "Champ obligatoire",
+                    JOptionPane.WARNING_MESSAGE);
+            email.requestFocus();
+            return;
+        }
+        if (pass.isEmpty()){
+            JOptionPane.showMessageDialog(this,
+                "Veuillez saisir votre mot de passe",
+                "Champ obligatoire",
+                JOptionPane.WARNING_MESSAGE);
+            motDePasse.requestFocus();
+            return;
+        }
+        
+        Utilisateur utilisateur = loginController.connecter(mail,pass);
+        
+        if (utilisateur != null){
+            JOptionPane.showMessageDialog(this,
+                    "Bienvenue" + utilisateur.getEmail() + "!",
+                    "Connexion réussie",
+                    JOptionPane.INFORMATION_MESSAGE);
+            
+            new MainFrame().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Email ou mot de passe incorrect",
+                    "Echec de connexion",
+                    JOptionPane.ERROR_MESSAGE);
+            motDePasse.setText("");
+            motDePasse.requestFocus();
+        }
     }//GEN-LAST:event_seConnecterActionPerformed
 
     private void motDePasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motDePasseActionPerformed

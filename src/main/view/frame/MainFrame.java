@@ -33,23 +33,6 @@ public class MainFrame extends javax.swing.JFrame {
         int width = (int) (screenSize.width * 0.8);
         int height = (int) (screenSize.height * 0.8);
         this.setSize(width, height);
-
-        /*// 3. Centrer la fenêtre
-        this.setLocationRelativeTo(null);
-        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane();
-        scrollPane.setViewportView(containerPanel);
-
-        3. Configuration : barre verticale si besoin, jamais d'horizontale
-        scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
-        scrollPane.setBorder(null);
-
-        this.getContentPane().add(scrollPane, java.awt.BorderLayout.CENTER);
-
-        this.revalidate();
-        this.repaint();*/
         
         this.getContentPane().remove(containerPanel);
         
@@ -107,6 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         btnCategorie = new javax.swing.JButton();
         containerPanel = new javax.swing.JPanel();
+        dashboardPanel1 = new main.view.panel.DashboardPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("menuPrincipal"); // NOI18N
@@ -330,6 +314,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         containerPanel.setBackground(new java.awt.Color(204, 204, 204));
         containerPanel.setLayout(new java.awt.BorderLayout());
+        containerPanel.add(dashboardPanel1, java.awt.BorderLayout.CENTER);
+
         getContentPane().add(containerPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -393,6 +379,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnProduit;
     private javax.swing.JPanel containerPanel;
+    private main.view.panel.DashboardPanel dashboardPanel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -37,21 +37,21 @@ public class ProduitPanel extends javax.swing.JPanel {
         listeTableProduit.setRowHeight(50); // Lignes plus spacieuses
         listeTableProduit.setSelectionBackground(new java.awt.Color(51, 153, 255)); 
 
-        // 2. Supprimer les lignes de grille moches
+        
         listeTableProduit.setShowGrid(false);
         listeTableProduit.setIntercellSpacing(new java.awt.Dimension(0, 0));
         listeTableProduit.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
 
-        // 3. Centrer le texte dans les colonnes
+        
         javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
 
-        // On applique le centrage à chaque colonne
+        
         for (int i = 0; i < listeTableProduit.getColumnCount(); i++) {
             listeTableProduit.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
 
-        // 4. Supprimer la bordure du ScrollPane qui entoure la table
+        
         jScrollPane1.setBorder(null);
     }
 
@@ -84,7 +84,7 @@ public class ProduitPanel extends javax.swing.JPanel {
         listeTableProduit = new javax.swing.JTable();
         supprimerProduit = new javax.swing.JButton();
         nomProd1 = new javax.swing.JTextField();
-        enregistrer2 = new javax.swing.JButton();
+        rechercher = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(1548, 1327));
@@ -250,13 +250,13 @@ public class ProduitPanel extends javax.swing.JPanel {
 
         nomProd1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        enregistrer2.setBackground(new java.awt.Color(153, 153, 153));
-        enregistrer2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        enregistrer2.setText("RECHERCHER");
-        enregistrer2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, new java.awt.Color(153, 153, 153), java.awt.Color.gray, java.awt.Color.darkGray));
-        enregistrer2.addActionListener(new java.awt.event.ActionListener() {
+        rechercher.setBackground(new java.awt.Color(153, 153, 153));
+        rechercher.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        rechercher.setText("RECHERCHER");
+        rechercher.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, new java.awt.Color(153, 153, 153), java.awt.Color.gray, java.awt.Color.darkGray));
+        rechercher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enregistrer2ActionPerformed(evt);
+                rechercherActionPerformed(evt);
             }
         });
 
@@ -275,7 +275,7 @@ public class ProduitPanel extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(nomProd1)
                                 .addGap(18, 18, 18)
-                                .addComponent(enregistrer2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(375, 375, 375)
                                 .addComponent(supprimerProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1197, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -289,7 +289,7 @@ public class ProduitPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(supprimerProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enregistrer2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nomProd1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,17 +404,86 @@ public class ProduitPanel extends javax.swing.JPanel {
 
     private void supprimerProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerProduitActionPerformed
         // TODO add your handling code here:
+        try {
+            int selectedRow = listeTableProduit.getSelectedRow();
+
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this,
+                    "Veuillez sélectionner un produit à supprimer",
+                    "Aucune sélection",
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            String     idProd = String.valueOf(listeTableProduit.getValueAt(selectedRow, 0));
+            String nomProduit = String.valueOf(listeTableProduit.getValueAt(selectedRow, 0));
+
+            int confirmation = JOptionPane.showConfirmDialog(this,
+                "Voulez-vous vraiment supprimer le produit '" + nomProduit + "' ?",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+
+           if (confirmation == JOptionPane.YES_OPTION) {
+                String resultat = produitController.supprimerProduit(idProd);
+            
+                if ("OK".equals(resultat)) {
+                    JOptionPane.showMessageDialog(this,
+                        "Produit supprimé avec succès !",
+                        "Succès",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    chargerProduits();
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                        resultat,
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur : " + e.getMessage(),
+                "Erreur",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_supprimerProduitActionPerformed
 
-    private void enregistrer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrer2ActionPerformed
+    private void rechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercherActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_enregistrer2ActionPerformed
+        String terme = nomProd1.getText().trim().toLowerCase();
+        try {
+            List<Produit> tous = produitController.obtenirTousProduits();
+            DefaultTableModel model = (DefaultTableModel) listeTableProduit.getModel();
+            model.setRowCount(0);
+
+            for (Produit p : tous) {
+                if (terme.isEmpty() || p.getNom().toLowerCase().contains(terme)) {
+                    model.addRow(new Object[]{
+                        p.getIdProd(),
+                        p.getNom(),
+                        p.getPrixVente(),
+                        p.getCategorie().getLibelle(),
+                        p.getStockActuel(),
+                        p.getSeuilAlerte()
+                    });
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur : " + e.getMessage(),
+                "Erreur",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_rechercherActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Categorie> cbCategorie;
     private javax.swing.JButton enregistrer;
-    private javax.swing.JButton enregistrer2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -430,6 +499,7 @@ public class ProduitPanel extends javax.swing.JPanel {
     private javax.swing.JTextField nomProd;
     private javax.swing.JTextField nomProd1;
     private javax.swing.JSpinner prix_prod;
+    private javax.swing.JButton rechercher;
     private javax.swing.JSpinner seuil;
     private javax.swing.JSpinner stock;
     private javax.swing.JButton supprimerProduit;
@@ -465,31 +535,93 @@ public class ProduitPanel extends javax.swing.JPanel {
 
     private void chargerProduits() {
     try {
-        // Récupérer tous les produits via le controller
         List<Produit> listeProduits = produitController.obtenirTousProduits();
-        
-        // Obtenir le modèle du tableau
-        DefaultTableModel model = (DefaultTableModel) listeTableProduit.getModel();
-        
-        // Vider le tableau
-        model.setRowCount(0);
-        
-        // Remplir le tableau avec les produits (4 colonnes seulement)
+
+        DefaultTableModel model = new DefaultTableModel(
+            new String[]{"idProd", "Nom du produit", "Prix Unitaire", "Catégorie", "Stock Actuel", "Seuil d'Alerte"},
+            0
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 2; //  Seulement le prix
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                switch (columnIndex) {
+                    case 2: return Double.class;
+                    case 4: return Integer.class;
+                    case 5: return Integer.class;
+                    default: return String.class;
+                }
+            }
+        };
+
         for (Produit p : listeProduits) {
-            Object[] row = new Object[5];
-            row[0] = p.getNom();                // Nom du produit
-            row[1] = p.getPrixVente();          // Prix Unitaire
-            row[2] = p.getCategorie().getLibelle(); // libelle de la catégorie
-            row[3] = p.getStockActuel();        // Stock Actuel
-            row[4] = p.getSeuilAlerte();        // Seuil d'Alerte
-            
-            model.addRow(row);
+            model.addRow(new Object[]{
+                p.getIdProd(),
+                p.getNom(),
+                p.getPrixVente(),
+                p.getCategorie().getLibelle(),
+                p.getStockActuel(),
+                p.getSeuilAlerte()
+            });
         }
+
+        listeTableProduit.setModel(model);
+
+        //Cacher la colonne idProd
+        listeTableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        listeTableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        listeTableProduit.getColumnModel().getColumn(0).setWidth(0);
+
+        // Écouter les modifications du prix
+        model.addTableModelListener(e -> {
+            int row = e.getFirstRow();
+            int col = e.getColumn();
+
+            if (e.getType() == javax.swing.event.TableModelEvent.UPDATE && col == 2) {
+                try {
+                    String idProd = String.valueOf(model.getValueAt(row, 0));
+                    Produit produit = produitController.obtenirProduitParId(idProd);
+                    if (produit == null) return;
+
+                    double nouveauPrix = ((Number) model.getValueAt(row, 2)).doubleValue();
+
+                    String resultat = produitController.modifierProduit(
+                        idProd,
+                        produit.getNom(),
+                        produit.getCategorie().getIdCat(),
+                        nouveauPrix,
+                        produit.getStockActuel(),
+                        produit.getSeuilAlerte()
+                    );
+
+                    if (!"OK".equals(resultat)) {
+                        JOptionPane.showMessageDialog(this,
+                            "Erreur : " + resultat,
+                            "Erreur de modification",
+                            JOptionPane.ERROR_MESSAGE);
+                        chargerProduits();
+                    }
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this,
+                        "Erreur : " + ex.getMessage(),
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+                    chargerProduits();
+                }
+            }
+        });
+
         
+        appliquerStyleTableau();
+
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, 
-            "Erreur lors du chargement des produits : " + e.getMessage(), 
-            "Erreur", 
+        JOptionPane.showMessageDialog(this,
+            "Erreur lors du chargement des produits : " + e.getMessage(),
+            "Erreur",
             JOptionPane.ERROR_MESSAGE);
         e.printStackTrace();
     }
@@ -509,4 +641,21 @@ public class ProduitPanel extends javax.swing.JPanel {
         nomProd.requestFocus();
     }
     
+    private void appliquerStyleTableau() {
+        listeTableProduit.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24));
+        listeTableProduit.getTableHeader().setBackground(Color.BLUE);
+        listeTableProduit.getTableHeader().setForeground(java.awt.Color.BLACK);
+        listeTableProduit.setRowHeight(50);
+        listeTableProduit.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        listeTableProduit.setShowGrid(false);
+        listeTableProduit.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        listeTableProduit.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        for (int i = 0; i < listeTableProduit.getColumnCount(); i++) {
+            listeTableProduit.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        jScrollPane1.setBorder(null);
+    }
 }

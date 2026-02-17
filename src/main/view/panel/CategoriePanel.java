@@ -69,9 +69,9 @@ public class CategoriePanel extends javax.swing.JPanel {
         libelle = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         description$ = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        enregistrer = new javax.swing.JButton();
+        vider = new javax.swing.JButton();
+        suprimer = new javax.swing.JButton();
         rechercherCateg = new javax.swing.JTextField();
         btnRecherche = new javax.swing.JButton();
 
@@ -105,21 +105,21 @@ public class CategoriePanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("DESCRIPTION DE LA CATEGORIE : ");
 
-        jButton1.setBackground(new java.awt.Color(35, 166, 97));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("ENREGISTRER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        enregistrer.setBackground(new java.awt.Color(35, 166, 97));
+        enregistrer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        enregistrer.setText("ENREGISTRER");
+        enregistrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                enregistrerActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 153));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("VIDER");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        vider.setBackground(new java.awt.Color(153, 153, 153));
+        vider.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        vider.setText("VIDER");
+        vider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                viderActionPerformed(evt);
             }
         });
 
@@ -139,9 +139,9 @@ public class CategoriePanel extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(description$)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(enregistrer, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(vider, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(114, 114, 114))
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,17 +157,17 @@ public class CategoriePanel extends javax.swing.JPanel {
                     .addComponent(description$, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enregistrer, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vider, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
-        jButton3.setBackground(new java.awt.Color(255, 102, 102));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setText("SUPPRIMER");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        suprimer.setBackground(new java.awt.Color(255, 102, 102));
+        suprimer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        suprimer.setText("SUPPRIMER");
+        suprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                suprimerActionPerformed(evt);
             }
         });
 
@@ -191,7 +191,7 @@ public class CategoriePanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(73, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -199,7 +199,7 @@ public class CategoriePanel extends javax.swing.JPanel {
                                 .addGap(36, 36, 36)
                                 .addComponent(btnRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(suprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1))
                         .addGap(95, 95, 95))))
             .addGroup(layout.createSequentialGroup()
@@ -219,7 +219,7 @@ public class CategoriePanel extends javax.swing.JPanel {
                 .addGap(85, 85, 85)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnRecherche, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(suprimer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rechercherCateg))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +227,7 @@ public class CategoriePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         // TODO add your handling code here:
         
         try {
@@ -274,11 +274,16 @@ public class CategoriePanel extends javax.swing.JPanel {
                 JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_enregistrerActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void viderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viderActionPerformed
         // TODO add your handling code here:
+        viderFormulaire();
+    }//GEN-LAST:event_viderActionPerformed
 
+    private void suprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suprimerActionPerformed
+        // TODO add your handling code here:
+        
         try {
             int selectedRow = tabCategorie.getSelectedRow();
         
@@ -314,7 +319,8 @@ public class CategoriePanel extends javax.swing.JPanel {
                         JOptionPane.ERROR_MESSAGE);
                 }
             }
-        
+            viderFormulaire();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
                 "Erreur : " + e.getMessage(),
@@ -322,24 +328,33 @@ public class CategoriePanel extends javax.swing.JPanel {
                 JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_suprimerActionPerformed
 
     private void btnRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechercheActionPerformed
         // TODO add your handling code here:
+        String terme = rechercherCateg.getText().trim().toLowerCase();
+        try {
+            List<Categorie> toutes = categorieController.listerToutesLesCategories();
+            DefaultTableModel model = (DefaultTableModel) tabCategorie.getModel();
+            model.setRowCount(0);
+            for (Categorie c : toutes) {
+                if (terme.isEmpty()
+                        || c.getLibelle().toLowerCase().contains(terme)
+                        || (c.getDescription() != null && c.getDescription().toLowerCase().contains(terme))) {
+                    model.addRow(new Object[]{c.getIdCat(), c.getLibelle(), c.getDescription(), 0});
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erreur : " + e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnRechercheActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRecherche;
     private javax.swing.JTextField description$;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton enregistrer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -348,7 +363,9 @@ public class CategoriePanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField libelle;
     private javax.swing.JTextField rechercherCateg;
+    private javax.swing.JButton suprimer;
     private javax.swing.JTable tabCategorie;
+    private javax.swing.JButton vider;
     // End of variables declaration//GEN-END:variables
 
 /**
@@ -358,18 +375,51 @@ public class CategoriePanel extends javax.swing.JPanel {
         try {
             List<Categorie> listeCategories = categorieController.listerToutesLesCategories();
         
-            DefaultTableModel model = (DefaultTableModel) tabCategorie.getModel();
-            model.setRowCount(0);
+            DefaultTableModel model = new DefaultTableModel(
+                new String[]{"CODE CATEGORIE", "NOM DE LA CATEGORIE", "DESCRIPTION DE LA CATEGORIE", "NOMBRE DE PRODUITS"},
+                0
+            ) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return column == 1 || column == 2; // ✅ Seulement libellé et description
+                }
+            };
+
         
             for (Categorie c : listeCategories) {
                 Object[] row = new Object[4];
-                row[0] = c.getIdCat();              // Code catégorie
-                row[1] = c.getLibelle();            // Nom
-                row[2] = c.getDescription();                     // Description (pas dans l'entité)
-                row[3] = 0;                         // Nombre de produits (à implémenter)
+                row[0] = c.getIdCat();              
+                row[1] = c.getLibelle();            
+                row[2] = c.getDescription();
+                row[3] = categorieController.compterProduitParCategorie(String.valueOf(c.getIdCat()));                         
             
                 model.addRow(row);
             }
+            
+            tabCategorie.setModel(model);
+            
+            model.addTableModelListener(e ->{
+                int row = e.getFirstRow();
+                int col = e.getColumn();
+                
+                if (e.getType() == javax.swing.event.TableModelEvent.UPDATE && col != -1) {
+                    String idCat       = String.valueOf(model.getValueAt(row, 0));
+                    String nouveauLibelle     = String.valueOf(model.getValueAt(row, 1));
+                    String nouvelleDescription = String.valueOf(model.getValueAt(row, 2));
+
+                    String resultat = categorieController.modifierCategorie(idCat, nouveauLibelle, nouvelleDescription);
+
+                    if (!"OK".equals(resultat)) {
+                        JOptionPane.showMessageDialog(this,
+                        "Erreur lors de la modification : " + resultat,
+                            "Erreur",
+                            JOptionPane.ERROR_MESSAGE);
+                        chargerCategories(); // ✅ Recharger pour annuler le changement affiché
+                    }
+                }
+                
+            });
+            appliquerStyleTableau();
         
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
@@ -387,5 +437,23 @@ public class CategoriePanel extends javax.swing.JPanel {
         libelle.setText("");
         description$.setText("");
         libelle.requestFocus();
+    }
+
+    private void appliquerStyleTableau() {
+        tabCategorie.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24));
+        tabCategorie.getTableHeader().setBackground(Color.BLUE);
+        tabCategorie.getTableHeader().setForeground(java.awt.Color.BLACK);
+        tabCategorie.setRowHeight(50);
+        tabCategorie.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        tabCategorie.setShowGrid(false);
+        tabCategorie.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tabCategorie.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        for (int i = 0; i < tabCategorie.getColumnCount(); i++) {
+            tabCategorie.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        jScrollPane1.setBorder(null);
     }
 }

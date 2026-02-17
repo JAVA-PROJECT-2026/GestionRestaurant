@@ -27,6 +27,7 @@ CREATE TABLE Categorie(
     libelle VARCHAR(50) NOT NULL UNIQUE
 );
 
+
 -- =====================================================
 -- TABLE PRODUIT
 -- =====================================================

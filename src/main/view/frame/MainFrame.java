@@ -6,6 +6,7 @@ package main.view.frame;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import main.util.Utilis;
 import main.view.panel.CategoriePanel;
 import main.view.panel.CommandePanel;
@@ -105,6 +106,7 @@ public class MainFrame extends javax.swing.JFrame {
         restoName.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         restoName.setForeground(new java.awt.Color(255, 255, 255));
         restoName.setText("CANTINE IAI");
+        restoName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,7 +136,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnDashboard.setText("  Dashboard");
         btnDashboard.setBorderPainted(false);
         btnDashboard.setContentAreaFilled(false);
-        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDashboard.setFocusPainted(false);
         btnDashboard.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +168,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCommande.setText("   Commandes");
         btnCommande.setBorderPainted(false);
         btnCommande.setContentAreaFilled(false);
-        btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCommande.setFocusPainted(false);
         btnCommande.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCommande.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +200,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnProduit.setText("   Produits");
         btnProduit.setBorderPainted(false);
         btnProduit.setContentAreaFilled(false);
-        btnProduit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnProduit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProduit.setFocusPainted(false);
         btnProduit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnProduit.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +232,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCategorie.setText("    Catégories");
         btnCategorie.setBorderPainted(false);
         btnCategorie.setContentAreaFilled(false);
-        btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCategorie.setFocusPainted(false);
         btnCategorie.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCategorie.addActionListener(new java.awt.event.ActionListener() {
@@ -260,6 +262,12 @@ public class MainFrame extends javax.swing.JFrame {
         deconnexion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         deconnexion.setForeground(new java.awt.Color(255, 255, 255));
         deconnexion.setText("DECONNEXION");
+        deconnexion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deconnexion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deconnexionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -348,6 +356,19 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategorieActionPerformed
         showPanel(new CategoriePanel());
     }//GEN-LAST:event_btnCategorieActionPerformed
+
+    private void deconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deconnexionActionPerformed
+        // TODO add your handling code here:
+        int confirmation = JOptionPane.showConfirmDialog(this,
+                "Voulez-vous vraiment vous déconnecter ? ",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        
+        if (confirmation == JOptionPane.YES_OPTION) {
+            new LoginFrame().setVisible(true);
+            this.dispose();
+        } 
+    }//GEN-LAST:event_deconnexionActionPerformed
 
     /**
      * @param args the command line arguments

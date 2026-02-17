@@ -234,8 +234,8 @@ public class LoginFrame extends javax.swing.JFrame {
         
         if (utilisateur != null){
             JOptionPane.showMessageDialog(this,
-                    "Bienvenue" + utilisateur.getEmail() + "!",
-                    "Connexion réussie",
+                    "Bienvenue  " + utilisateur.getEmail() + "  !",
+                    " Connexion réussie",
                     JOptionPane.INFORMATION_MESSAGE);
             
             new MainFrame().setVisible(true);

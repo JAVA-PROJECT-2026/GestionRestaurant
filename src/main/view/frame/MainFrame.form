@@ -445,6 +445,8 @@
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+<<<<<<< HEAD
+=======
       <SubComponents>
         <Component class="main.view.panel.DashboardPanel" name="dashboardPanel2">
           <Constraints>
@@ -454,6 +456,7 @@
           </Constraints>
         </Component>
       </SubComponents>
+>>>>>>> origin/main
     </Container>
   </SubComponents>
 </Form>

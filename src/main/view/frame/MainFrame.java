@@ -102,7 +102,10 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         btnCategorie = new javax.swing.JButton();
         containerPanel = new javax.swing.JPanel();
+<<<<<<< HEAD
+=======
         dashboardPanel2 = new main.view.panel.DashboardPanel();
+>>>>>>> origin/main
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("menuPrincipal"); // NOI18N
@@ -365,8 +368,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         containerPanel.setBackground(new java.awt.Color(204, 204, 204));
         containerPanel.setLayout(new java.awt.BorderLayout());
+<<<<<<< HEAD
+=======
         containerPanel.add(dashboardPanel2, java.awt.BorderLayout.CENTER);
 
+>>>>>>> origin/main
         getContentPane().add(containerPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -435,7 +441,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnProduit;
     private javax.swing.JButton btnStock;
     private javax.swing.JPanel containerPanel;
+<<<<<<< HEAD
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+=======
     private main.view.panel.DashboardPanel dashboardPanel2;
+>>>>>>> origin/main
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

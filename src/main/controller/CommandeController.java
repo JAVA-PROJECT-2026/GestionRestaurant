@@ -209,4 +209,34 @@ public class CommandeController {
     public int compterCommandesParEtat(EtatCommande etat) {
         return commandeDAO.countByEtat(etat);
     }
+    
+    /**
+ * Modifier l'état d'une commande
+ * @param idCom ID de la commande
+ * @param nouvelEtat Etat sous forme de String (VALIDEE, EN_COURS, ANNULEE)
+ * @throws SQLException
+ * @throws IllegalArgumentException
+ */
+public void modifierEtatCommande(String idCom, String nouvelEtat)
+        throws SQLException, IllegalArgumentException {
+
+    Commande commande = commandeDAO.findById(idCom);
+
+    if (commande == null) {
+        throw new IllegalArgumentException("Commande introuvable");
+    }
+
+    EtatCommande etat = EtatCommande.valueOf(nouvelEtat);
+
+    // Règles métier
+    if (commande.getEtat() == EtatCommande.VALIDEE) {
+        throw new IllegalArgumentException(
+            "Impossible de modifier une commande déjà validée"
+        );
+    }
+
+    commande.setEtat(etat);
+    commandeDAO.update(commande);
+}
+
 }

@@ -40,7 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(containerPanel);
         
         scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
         scrollPane.setBorder(null);

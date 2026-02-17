@@ -7,6 +7,7 @@ package main.view.panel;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 import main.controller.CommandeController;
 import main.controller.ProduitController;
@@ -42,6 +43,14 @@ public class CommandePanel extends javax.swing.JPanel {
         
         jPanel1.validate();
         jPanel2.repaint();
+        
+        jSpinner1.setValue(1);
+        
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(jSpinner2, "yyyy-MM-dd");
+        jSpinner2.setEditor(editor);
+        
+        ((JSpinner.DefaultEditor) jSpinner2.getEditor()).getTextField().setEditable(false);
+
         
         cmdTable.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24));
         cmdTable.getTableHeader().setBackground(Color.BLUE); // Ton vert
@@ -504,6 +513,9 @@ public class CommandePanel extends javax.swing.JPanel {
                 "Erreur : " + e.getMessage(),
                 "Erreur", JOptionPane.ERROR_MESSAGE);
         }
+        
+        mettreAJourLabelProduits();
+
     }
 
     
@@ -672,4 +684,57 @@ public class CommandePanel extends javax.swing.JPanel {
         }
         jScrollPane3.setBorder(null);
     }
+    
+    private void modifierEtatCommande() {
+    try {
+        int selectedRow = cmdTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this,
+                "Sélectionnez une commande",
+                "Aucune sélection",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String idCom = String.valueOf(cmdTable.getValueAt(selectedRow, 0));
+        String nouvelEtat = (String) jComboBox1.getSelectedItem();
+
+        commandeController.modifierEtatCommande(idCom, nouvelEtat);
+
+        JOptionPane.showMessageDialog(this,
+            "Etat modifié avec succès",
+            "Succès",
+            JOptionPane.INFORMATION_MESSAGE);
+
+        chargerCommandes();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+            "Erreur : " + e.getMessage(),
+            "Erreur",
+            JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void mettreAJourLabelProduits() {
+    StringBuilder sb = new StringBuilder();
+
+    for (int i = 0; i < modelLignes.getRowCount(); i++) {
+        String nom = String.valueOf(modelLignes.getValueAt(i, 1));
+        int qte = (int) modelLignes.getValueAt(i, 3);
+
+        sb.append(nom)
+          .append(" x")
+          .append(qte);
+
+        if (i < modelLignes.getRowCount() - 1) {
+            sb.append(" | ");
+        }
+    }
+
+    selectedProd.setText(sb.toString());
+}
+
+
 }

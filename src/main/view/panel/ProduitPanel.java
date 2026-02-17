@@ -82,7 +82,7 @@ public class ProduitPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listeTableProduit = new javax.swing.JTable();
-        enregistrer1 = new javax.swing.JButton();
+        supprimerProduit = new javax.swing.JButton();
         nomProd1 = new javax.swing.JTextField();
         enregistrer2 = new javax.swing.JButton();
 
@@ -238,13 +238,13 @@ public class ProduitPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(listeTableProduit);
 
-        enregistrer1.setBackground(new java.awt.Color(255, 102, 102));
-        enregistrer1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        enregistrer1.setText("SUPPRIMER");
-        enregistrer1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, new java.awt.Color(153, 153, 153), java.awt.Color.gray, java.awt.Color.darkGray));
-        enregistrer1.addActionListener(new java.awt.event.ActionListener() {
+        supprimerProduit.setBackground(new java.awt.Color(255, 102, 102));
+        supprimerProduit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        supprimerProduit.setText("SUPPRIMER");
+        supprimerProduit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, new java.awt.Color(153, 153, 153), java.awt.Color.gray, java.awt.Color.darkGray));
+        supprimerProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enregistrer1ActionPerformed(evt);
+                supprimerProduitActionPerformed(evt);
             }
         });
 
@@ -277,7 +277,7 @@ public class ProduitPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(enregistrer2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(375, 375, 375)
-                                .addComponent(enregistrer1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(supprimerProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1197, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(350, 350, 350))
         );
@@ -288,7 +288,7 @@ public class ProduitPanel extends javax.swing.JPanel {
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(enregistrer1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(supprimerProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enregistrer2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nomProd1))
                 .addGap(18, 18, 18)
@@ -405,9 +405,9 @@ public class ProduitPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCategorieActionPerformed
 
-    private void enregistrer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrer1ActionPerformed
+    private void supprimerProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerProduitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_enregistrer1ActionPerformed
+    }//GEN-LAST:event_supprimerProduitActionPerformed
 
     private void enregistrer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrer2ActionPerformed
         // TODO add your handling code here:
@@ -417,7 +417,6 @@ public class ProduitPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Categorie> cbCategorie;
     private javax.swing.JButton enregistrer;
-    private javax.swing.JButton enregistrer1;
     private javax.swing.JButton enregistrer2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -436,6 +435,7 @@ public class ProduitPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner prix_prod;
     private javax.swing.JSpinner seuil;
     private javax.swing.JSpinner stock;
+    private javax.swing.JButton supprimerProduit;
     // End of variables declaration//GEN-END:variables
 
     private void chargerCategories() {

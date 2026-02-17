@@ -89,6 +89,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnProduit = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         btnCategorie = new javax.swing.JButton();
+        deconnexion = new javax.swing.JToggleButton();
         containerPanel = new javax.swing.JPanel();
         dashboardPanel1 = new main.view.panel.DashboardPanel();
 
@@ -255,6 +256,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        deconnexion.setBackground(new java.awt.Color(102, 102, 102));
+        deconnexion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        deconnexion.setForeground(new java.awt.Color(255, 255, 255));
+        deconnexion.setText("DECONNEXION");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -271,6 +277,10 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPanel3, jPanel5});
@@ -286,7 +296,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(514, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
+                .addComponent(deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel3, jPanel5});
@@ -380,6 +392,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnProduit;
     private javax.swing.JPanel containerPanel;
     private main.view.panel.DashboardPanel dashboardPanel1;
+    private javax.swing.JToggleButton deconnexion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

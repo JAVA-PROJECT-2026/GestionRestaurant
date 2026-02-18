@@ -15,7 +15,7 @@ public class MouvementStock {
     
 
 
-    private String typeMouv;
+    private TypeMouvement typeMouv;
     private String idMouv;
     private String idProd;
     private int quantite;
@@ -25,12 +25,11 @@ public class MouvementStock {
     
     public MouvementStock(){}
     
-    public MouvementStock(TypeMouvement typeMouv, String idProd,int quantite, Date dateMouv, String motif ) {
+    public MouvementStock(TypeMouvement typeMouv, String idProd, int quantite, String motif ) {
         this.idMouv = UUID.randomUUID().toString();
-        this.dateMouv = dateMouv;
         this.idProd = idProd;
         this.quantite = quantite;
-        this.typeMouv = typeMouv.name();
+        this.typeMouv = typeMouv;
         this.motif = motif;
     }
 
@@ -42,11 +41,11 @@ public class MouvementStock {
         this.idMouv = idMouv;
     }
 
-    public String getTypeMouv() {
+    public TypeMouvement getTypeMouv() {
         return typeMouv;
     }
 
-    public void setTypeMouv(String typeMouv) {
+    public void setTypeMouv(TypeMouvement typeMouv) {
         this.typeMouv = typeMouv;   
     }
 

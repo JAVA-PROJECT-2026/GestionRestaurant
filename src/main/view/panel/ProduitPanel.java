@@ -416,7 +416,7 @@ public class ProduitPanel extends javax.swing.JPanel {
             }
             
             String     idProd = String.valueOf(listeTableProduit.getValueAt(selectedRow, 0));
-            String nomProduit = String.valueOf(listeTableProduit.getValueAt(selectedRow, 0));
+            String nomProduit = String.valueOf(listeTableProduit.getValueAt(selectedRow, 1));
 
             int confirmation = JOptionPane.showConfirmDialog(this,
                 "Voulez-vous vraiment supprimer le produit '" + nomProduit + "' ?",

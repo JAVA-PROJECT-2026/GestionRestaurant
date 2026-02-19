@@ -416,7 +416,7 @@ public class ProduitPanel extends javax.swing.JPanel {
             }
             
             String     idProd = String.valueOf(listeTableProduit.getValueAt(selectedRow, 0));
-            String nomProduit = String.valueOf(listeTableProduit.getValueAt(selectedRow, 0));
+            String nomProduit = String.valueOf(listeTableProduit.getValueAt(selectedRow, 1));
 
             int confirmation = JOptionPane.showConfirmDialog(this,
                 "Voulez-vous vraiment supprimer le produit '" + nomProduit + "' ?",
@@ -543,7 +543,7 @@ public class ProduitPanel extends javax.swing.JPanel {
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 2; //  Seulement le prix
+                return column == 2 || column == 4; //  Seulement le prix
             }
 
             @Override
@@ -580,20 +580,21 @@ public class ProduitPanel extends javax.swing.JPanel {
             int row = e.getFirstRow();
             int col = e.getColumn();
 
-            if (e.getType() == javax.swing.event.TableModelEvent.UPDATE && col == 2) {
+            if (e.getType() == javax.swing.event.TableModelEvent.UPDATE && (col == 2 || col == 4)) {
                 try {
                     String idProd = String.valueOf(model.getValueAt(row, 0));
                     Produit produit = produitController.obtenirProduitParId(idProd);
                     if (produit == null) return;
 
                     double nouveauPrix = ((Number) model.getValueAt(row, 2)).doubleValue();
+                    int nouveauStock = ((Number) model.getValueAt(row, 4)).intValue();
 
                     String resultat = produitController.modifierProduit(
                         idProd,
                         produit.getNom(),
                         produit.getCategorie().getIdCat(),
                         nouveauPrix,
-                        produit.getStockActuel(),
+                        nouveauStock,
                         produit.getSeuilAlerte()
                     );
 

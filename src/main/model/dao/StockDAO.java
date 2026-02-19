@@ -25,17 +25,16 @@ public class StockDAO {
      */
     public boolean insertStock(MouvementStock stock) {
        
-        String sql = "INSERT INTO MouvementStock (idMouv, typeMouv, idProd, quantite, dateMouv, motif) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO MouvementStock (idMouv, typeMouv, idProd, quantite, motif) VALUES (?, ?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getConnection(); 
              PreparedStatement pst = conn.prepareStatement(sql)) {
             
             pst.setString(1, stock.getIdMouv());
-            pst.setString(2, stock.getTypeMouv());
+            pst.setString(2, stock.getTypeMouv().name());
             pst.setString(3, stock.getIdProd());
             pst.setInt(4, stock.getQuantite());
-            pst.setTimestamp(5, new Timestamp(stock.getDateMouv().getTime()));
-            pst.setString(6, stock.getMotif());
+            pst.setString(5, stock.getMotif());
             
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
@@ -62,7 +61,7 @@ public class StockDAO {
             while (rs.next()) {
                 MouvementStock stock = new MouvementStock();
                 stock.setIdMouv(rs.getString("idMouv"));
-                stock.setTypeMouv(rs.getString("typeMouv"));
+                stock.setTypeMouv(TypeMouvement.valueOf(rs.getString("typeMouv")));
                 stock.setIdProd(rs.getString("idProd"));
                 stock.setQuantite(rs.getInt("quantite"));
                 stock.setDateMouv(rs.getTimestamp("dateMouv"));
@@ -149,7 +148,7 @@ public class StockDAO {
         try (Connection conn = DatabaseConnection.getConnection(); 
              PreparedStatement pst = conn.prepareStatement(sql)) {
         
-            pst.setString(1, stock.getTypeMouv());
+            pst.setString(1, stock.getTypeMouv().name());
             pst.setString(2, stock.getIdProd());
             pst.setInt(3, stock.getQuantite());
             pst.setTimestamp(4, new Timestamp(stock.getDateMouv().getTime()));
@@ -189,7 +188,7 @@ public class StockDAO {
             if (rs.next()) {
                 stock = new MouvementStock();
                 stock.setIdMouv(rs.getString("idMouv"));
-                stock.setTypeMouv(rs.getString("typeMouv"));
+                stock.setTypeMouv(TypeMouvement.valueOf(rs.getString("typeMouv")));
                 stock.setIdProd(rs.getString("idProd"));
                 stock.setQuantite(rs.getInt("quantite"));
                 stock.setDateMouv(rs.getTimestamp("dateMouv"));
@@ -222,7 +221,7 @@ public class StockDAO {
             while (rs.next()) {
                 MouvementStock stock = new MouvementStock();
                 stock.setIdMouv(rs.getString("idMouv"));
-                stock.setTypeMouv(rs.getString("typeMouv"));
+                stock.setTypeMouv(TypeMouvement.valueOf(rs.getString("typeMouv")));
                 stock.setIdProd(rs.getString("idProd"));
                 stock.setQuantite(rs.getInt("quantite"));
                 stock.setDateMouv(rs.getTimestamp("dateMouv"));
@@ -257,7 +256,7 @@ public class StockDAO {
             while (rs.next()) {
                 MouvementStock stock = new MouvementStock();
                 stock.setIdMouv(rs.getString("idMouv"));
-                stock.setTypeMouv(rs.getString("typeMouv"));
+                stock.setTypeMouv(TypeMouvement.valueOf(rs.getString("typeMouv")));
                 stock.setIdProd(rs.getString("idProd"));
                 stock.setQuantite(rs.getInt("quantite"));
                 stock.setDateMouv(rs.getTimestamp("dateMouv"));
@@ -294,7 +293,7 @@ public class StockDAO {
             while (rs.next()) {
                 MouvementStock stock = new MouvementStock();
                 stock.setIdMouv(rs.getString("idMouv"));
-                stock.setTypeMouv(rs.getString("typeMouv"));
+                stock.setTypeMouv(TypeMouvement.valueOf(rs.getString("typeMouv")));
                 stock.setIdProd(rs.getString("idProd"));
                 stock.setQuantite(rs.getInt("quantite"));
                 stock.setDateMouv(rs.getTimestamp("dateMouv"));

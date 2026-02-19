@@ -19,11 +19,12 @@ public class Commande {
     private EtatCommande etat;
     private double total;
 
-    public Commande(Date dateCommande, EtatCommande etat, double total) {
+    public Commande(EtatCommande etat) 
+    {
         this.idCom = UUID.randomUUID().toString();
-        this.dateCommande = dateCommande;
-        this.etat = etat;
-        this.total = total;
+         this.etat = etat;
+        //this.dateCommande = dateCommande
+        //this.total = total;
         
     }
     public Commande(){}

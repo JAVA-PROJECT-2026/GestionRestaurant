@@ -17,7 +17,6 @@ import main.model.entite.enums.TypeMouvement;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Date;
 import main.model.entite.enums.EtatCommande;
 
 
@@ -64,7 +63,7 @@ public class CommandeController {
      * @throws java.sql.SQLException
      */
     public Commande creerCommande() throws SQLException{
-        Commande commande = new Commande();
+        Commande commande = new Commande(EtatCommande.EN_COURS);
         commande.setTotalCommande(0.0);
         commande.setEtat(EtatCommande.EN_COURS);
         commandeDAO.insert(commande);
@@ -182,12 +181,11 @@ public class CommandeController {
             produitDAO.updateProduit(produit);
             
             // Créer un mouvement de sortie
-            MouvementStock mouvement = new MouvementStock();
-            mouvement.setTypeMouv(TypeMouvement.SORTIE.name());
+            MouvementStock mouvement = new MouvementStock(TypeMouvement.SORTIE, ligne.getIdProd(), ligne.getQuantite(), "Validation commande " + commandeId);
+            /*mouvement.setTypeMouv(TypeMouvement.SORTIE);
             mouvement.setIdProd(ligne.getIdProd());
             mouvement.setQuantite(ligne.getQuantite());
-            mouvement.setDateMouv(new Date());
-            mouvement.setMotif("Validation commande " + commandeId);
+            mouvement.setMotif("Validation commande " + commandeId);*/
             
             stockDAO.insertStock(mouvement);
         }

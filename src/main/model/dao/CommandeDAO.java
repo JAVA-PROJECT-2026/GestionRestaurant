@@ -28,9 +28,9 @@ public class CommandeDAO {
         try (Connection conn = DatabaseConnection.getConnection(); 
              PreparedStatement pst = conn.prepareStatement(sql)) {
             
-            pst.setString(0, commande.getIdCom());
-            pst.setString(1, commande.getEtat().name());
-            pst.setDouble(2, commande.getTotalCommande());
+            pst.setString(1, commande.getIdCom());
+            pst.setString(2, commande.getEtat().name());
+            pst.setDouble(3, commande.getTotalCommande());
            
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;

@@ -238,7 +238,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     " Connexion réussie",
                     JOptionPane.INFORMATION_MESSAGE);
             
-            new MainFrame().setVisible(true);
+            new MainFrame(mail).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this,
@@ -250,6 +250,8 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_seConnecterActionPerformed
 
+   
+    
     private void motDePasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motDePasseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_motDePasseActionPerformed

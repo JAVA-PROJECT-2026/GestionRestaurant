@@ -183,7 +183,7 @@ public class ProduitController {
         
         // Vérifier dans les commandes VALIDEE (historique)
         for (Commande cmd : commandesValidees) {
-            if (ligneCommandeDAO.exists(cmd.getIdCom(), idProduit)) {
+           if (ligneCommandeDAO.exists(cmd.getIdCom(), idProduit)) {
                 return true;  // Le produit est dans l'historique !
             }
         }

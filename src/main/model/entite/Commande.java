@@ -22,8 +22,8 @@ public class Commande {
     public Commande(EtatCommande etat) 
     {
         this.idCom = UUID.randomUUID().toString();
-        //this.dateCommande = dateCommande;
-        this.etat = etat;
+         this.etat = etat;
+        //this.dateCommande = dateCommande
         //this.total = total;
         
     }

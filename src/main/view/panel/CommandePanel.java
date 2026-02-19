@@ -14,6 +14,7 @@ import main.controller.ProduitController;
 import main.model.entite.Commande;
 import main.model.entite.Produit;
 import main.model.dao.CommandeDAO;
+import main.model.entite.enums.EtatCommande;
 
 /**
  *
@@ -443,7 +444,7 @@ public class CommandePanel extends javax.swing.JPanel {
             ) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    return false;
+                    return column == 3;
                 }
             };
 
@@ -463,6 +464,37 @@ public class CommandePanel extends javax.swing.JPanel {
             cmdTable.getColumnModel().getColumn(0).setMinWidth(0);
             cmdTable.getColumnModel().getColumn(0).setMaxWidth(0);
             cmdTable.getColumnModel().getColumn(0).setWidth(0);
+            
+            // ecouter les modifications du status
+            model.addTableModelListener(e -> {
+                int row = e.getFirstRow();
+                int col = e.getColumn();
+                
+                if (e.getType() == javax.swing.event.TableModelEvent.UPDATE && col == 3) {
+                    try{
+                            String status = String.valueOf(model.getValueAt(row, 3));
+                            String idcom = String.valueOf(model.getValueAt(row, 0));
+                            Commande commande = commandeController.getCommandeById(idcom);
+                            if (commande == null){return;}
+                            
+                            if (EstEtatValide(status)){
+                                commandeController.modifierEtatCommande(idcom, status);
+                            } else {
+                                JOptionPane.showMessageDialog(this,
+                                    "Erreur : Status doit être EN_COURS, ANNULEE, VALIDEE",
+                                    "Erreur de modification",
+                                    JOptionPane.ERROR_MESSAGE);
+                                chargerCommandes();
+                            }
+                            
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(this,
+                        "Erreur : " + ex.getMessage(),
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+                    chargerCommandes();
+                }}
+            });
 
             appliquerStyleTableau();
 
@@ -744,6 +776,15 @@ private void mettreAJourLabelProduits() {
 
     selectedProd.setText(sb.toString());
 }
+
+    private boolean EstEtatValide(String status) {
+        try{
+            EtatCommande.valueOf(status);
+            return true;
+        }catch (IllegalArgumentException e){
+            return false;
+        }
+    }
 
 
 }

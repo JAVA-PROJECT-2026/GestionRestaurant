@@ -5,7 +5,7 @@
 package main.app;
 
 import javax.swing.UnsupportedLookAndFeelException;
-import main.view.frame.MainFrame;
+import main.view.frame.LoginFrame;
 
 /**
  *
@@ -27,7 +27,7 @@ public class Main {
 
         // Lancer le MainFrame
         java.awt.EventQueue.invokeLater(() -> {
-            new MainFrame().setVisible(true);
+            new LoginFrame().setVisible(true);
         });
     }
 }

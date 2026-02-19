@@ -12,8 +12,8 @@ import main.view.panel.CategoriePanel;
 import main.view.panel.CommandePanel;
 import main.view.panel.DashboardPanel;
 import main.view.panel.ProduitPanel;
-import main.view.panel.StockPanel;
-
+import main.view.frame.LoginFrame;
+import main.view.panel.StatistiquePanel;
 /**
  *
  * @author Ali Barry
@@ -24,7 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainFrame(String loginConnecte) {
         initComponents();
         
         // 1. Récupérer la taille de l'écran de l'utilisateur
@@ -56,6 +56,8 @@ public class MainFrame extends javax.swing.JFrame {
         btnCommande.setIcon(Utilis.resizeIcon("/resources/icons/dinner.png", 30, 30));
         btnDashboard.setIcon(Utilis.resizeIcon("/resources/icons/order-food.png", 30, 30));
         btnCategorie.setIcon(Utilis.resizeIcon("/resources/icons/food-order.png", 30, 30));
+        
+        configurerVisible(loginConnecte);
     }
 
     /**
@@ -74,6 +76,10 @@ public class MainFrame extends javax.swing.JFrame {
         containerPanel.repaint();
     }
     
+    private void configurerVisible(String loginConnecte){
+        statistique.setVisible("root".equals(loginConnecte));
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -90,6 +96,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnProduit = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         btnCategorie = new javax.swing.JButton();
+        statistique = new javax.swing.JButton();
         deconnexion = new javax.swing.JToggleButton();
         containerPanel = new javax.swing.JPanel();
         dashboardPanel1 = new main.view.panel.DashboardPanel();
@@ -106,7 +113,7 @@ public class MainFrame extends javax.swing.JFrame {
         restoName.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         restoName.setForeground(new java.awt.Color(255, 255, 255));
         restoName.setText("CANTINE IAI");
-        restoName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        restoName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,7 +143,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnDashboard.setText("  Dashboard");
         btnDashboard.setBorderPainted(false);
         btnDashboard.setContentAreaFilled(false);
-        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDashboard.setFocusPainted(false);
         btnDashboard.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +175,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCommande.setText("   Commandes");
         btnCommande.setBorderPainted(false);
         btnCommande.setContentAreaFilled(false);
-        btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCommande.setFocusPainted(false);
         btnCommande.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCommande.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +207,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnProduit.setText("   Produits");
         btnProduit.setBorderPainted(false);
         btnProduit.setContentAreaFilled(false);
-        btnProduit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProduit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProduit.setFocusPainted(false);
         btnProduit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnProduit.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +239,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCategorie.setText("    Catégories");
         btnCategorie.setBorderPainted(false);
         btnCategorie.setContentAreaFilled(false);
-        btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCategorie.setFocusPainted(false);
         btnCategorie.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCategorie.addActionListener(new java.awt.event.ActionListener() {
@@ -241,20 +248,42 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        statistique.setBackground(new java.awt.Color(35, 166, 97));
+        statistique.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        statistique.setForeground(new java.awt.Color(255, 255, 255));
+        statistique.setText("Satatistiques");
+        statistique.setBorderPainted(false);
+        statistique.setContentAreaFilled(false);
+        statistique.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        statistique.setFocusPainted(false);
+        statistique.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        statistique.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statistiqueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(btnCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(btnCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(statistique, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnCategorie, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                .addGap(56, 56, 56)
+                .addComponent(statistique, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -262,7 +291,7 @@ public class MainFrame extends javax.swing.JFrame {
         deconnexion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         deconnexion.setForeground(new java.awt.Color(255, 255, 255));
         deconnexion.setText("DECONNEXION");
-        deconnexion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deconnexion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         deconnexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deconnexionActionPerformed(evt);
@@ -286,7 +315,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(26, 26, 26)
                 .addComponent(deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -304,9 +333,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
                 .addComponent(deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(164, 164, 164))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel3, jPanel5});
@@ -370,6 +399,11 @@ public class MainFrame extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_deconnexionActionPerformed
 
+    private void statistiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statistiqueActionPerformed
+        // TODO add your handling code here:
+        showPanel(new StatistiquePanel());
+    }//GEN-LAST:event_statistiqueActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,8 +433,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame("ajavon@iai.tg").setVisible(true);
                 
             }
         });
@@ -422,5 +457,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JLabel restoName;
+    private javax.swing.JButton statistique;
     // End of variables declaration//GEN-END:variables
 }

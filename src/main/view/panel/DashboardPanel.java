@@ -59,6 +59,8 @@ public class DashboardPanel extends javax.swing.JPanel {
         // 4. Supprimer la bordure du ScrollPane qui entoure la table
         jScrollPane1.setBorder(null);
         
+        
+        
     }
 
     /**

@@ -543,7 +543,7 @@ public class ProduitPanel extends javax.swing.JPanel {
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 2 || column == 4; //  Seulement le prix
+                return column == 2 || column == 4 || column == 1; 
             }
 
             @Override
@@ -580,7 +580,7 @@ public class ProduitPanel extends javax.swing.JPanel {
             int row = e.getFirstRow();
             int col = e.getColumn();
 
-            if (e.getType() == javax.swing.event.TableModelEvent.UPDATE && (col == 2 || col == 4)) {
+            if (e.getType() == javax.swing.event.TableModelEvent.UPDATE && (col == 2 || col == 4 || col == 1)) {
                 try {
                     String idProd = String.valueOf(model.getValueAt(row, 0));
                     Produit produit = produitController.obtenirProduitParId(idProd);
@@ -588,10 +588,11 @@ public class ProduitPanel extends javax.swing.JPanel {
 
                     double nouveauPrix = ((Number) model.getValueAt(row, 2)).doubleValue();
                     int nouveauStock = ((Number) model.getValueAt(row, 4)).intValue();
+                    String nouveauNom = ((String) model.getValueAt(row, 1));
 
                     String resultat = produitController.modifierProduit(
                         idProd,
-                        produit.getNom(),
+                        nouveauNom,
                         produit.getCategorie().getIdCat(),
                         nouveauPrix,
                         nouveauStock,

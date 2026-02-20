@@ -16,9 +16,10 @@ import org.jfree.data.general.DefaultPieDataset;
  * @author Ali Barry
  */
 public class StatistiquePanel extends javax.swing.JPanel {
-    private String userEmail;
+    private final String userEmail;
     /**
      * Creates new form StatistiquePanel
+     * @param email
      */
     public StatistiquePanel(String email) {
         initComponents();

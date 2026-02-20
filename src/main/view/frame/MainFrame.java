@@ -12,7 +12,6 @@ import main.view.panel.CategoriePanel;
 import main.view.panel.CommandePanel;
 import main.view.panel.DashboardPanel;
 import main.view.panel.ProduitPanel;
-import main.view.frame.LoginFrame;
 import main.view.panel.StatistiquePanel;
 /**
  *
@@ -23,6 +22,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
+     * @param loginConnecte
      */
     public MainFrame(String loginConnecte) {
         initComponents();
@@ -401,7 +401,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void statistiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statistiqueActionPerformed
         // TODO add your handling code here:
-        showPanel(new StatistiquePanel());
+        showPanel(new StatistiquePanel("root"));
     }//GEN-LAST:event_statistiqueActionPerformed
 
     /**

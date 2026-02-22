@@ -5,6 +5,8 @@
 package main.view.panel;
 
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -15,6 +17,7 @@ import main.model.entite.Commande;
 import main.model.entite.Produit;
 import main.model.dao.CommandeDAO;
 import main.model.entite.enums.EtatCommande;
+import main.util.FacturePDFGenerator;
 
 /**
  *
@@ -590,6 +593,11 @@ public class CommandePanel extends javax.swing.JPanel {
 
             
             commandeController.validerCommande(idCom);
+            String contenuFacture = genererContenuFacture(idCom);
+
+            String cheminPDF = FacturePDFGenerator.genererPDF(idCom, contenuFacture);
+
+            Desktop.getDesktop().open(new File(cheminPDF));
 
             JOptionPane.showMessageDialog(this,
                 "Commande validée avec succès ! Stock mis à jour.",
@@ -786,6 +794,37 @@ private void mettreAJourLabelProduits() {
         }catch (IllegalArgumentException e){
             return false;
         }
+    }
+    
+    
+    private String genererContenuFacture(String idCom) {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("CANTINE IAI 2026      Rue: Nykonapoe 228\n");
+        sb.append("--------------------------------------\n");
+        sb.append("Facture Commande N°: ").append(idCom).append("\n");
+        sb.append("Date : ").append(java.time.LocalDateTime.now()).append("\n");
+        sb.append("--------------------------------------\n");
+
+        for (int i = 0; i < modelLignes.getRowCount(); i++) {
+            String nom = String.valueOf(modelLignes.getValueAt(i, 1));
+            int qte = (int) modelLignes.getValueAt(i, 3);
+            double sousTotal = (double) modelLignes.getValueAt(i, 4);
+
+            sb.append(nom)
+              .append(": x")
+              .append(qte)
+              .append("   = ")
+              .append(sousTotal)
+              .append("\n");
+        }
+
+        sb.append("--------------------------------------\n");
+        sb.append("TOTAL : ").append(jTextField3.getText()).append("\n");
+        sb.append("\n\n\n       Merci pour votre confiance cher client !\n");
+
+        return sb.toString();
     }
 
 

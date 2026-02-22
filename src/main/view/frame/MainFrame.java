@@ -401,7 +401,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void statistiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statistiqueActionPerformed
         // TODO add your handling code here:
-        showPanel(new StatistiquePanel("root"));
+        showPanel(new StatistiquePanel());
     }//GEN-LAST:event_statistiqueActionPerformed
 
     /**

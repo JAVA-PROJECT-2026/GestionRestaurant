@@ -143,7 +143,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnDashboard.setText("  Dashboard");
         btnDashboard.setBorderPainted(false);
         btnDashboard.setContentAreaFilled(false);
-        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDashboard.setFocusPainted(false);
         btnDashboard.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +175,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCommande.setText("   Commandes");
         btnCommande.setBorderPainted(false);
         btnCommande.setContentAreaFilled(false);
-        btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCommande.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCommande.setFocusPainted(false);
         btnCommande.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCommande.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +207,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnProduit.setText("   Produits");
         btnProduit.setBorderPainted(false);
         btnProduit.setContentAreaFilled(false);
-        btnProduit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnProduit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProduit.setFocusPainted(false);
         btnProduit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnProduit.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +239,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCategorie.setText("   Catégories");
         btnCategorie.setBorderPainted(false);
         btnCategorie.setContentAreaFilled(false);
-        btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCategorie.setFocusPainted(false);
         btnCategorie.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCategorie.addActionListener(new java.awt.event.ActionListener() {

@@ -67,7 +67,7 @@ public class StatistiquePanel extends JPanel {
 
     // ──────────────────────────────────────────────────────────────────────────
 
-    public StatistiquePanel() {
+    public StatistiquePanel(String rootiaitg) {
         this.controller = new StatistiqueController();
         setLayout(new BorderLayout());
         setBackground(BG_DARK);
@@ -517,7 +517,7 @@ public class StatistiquePanel extends JPanel {
             frame.setMinimumSize(new Dimension(900, 600));
             frame.setLocationRelativeTo(null);
             frame.getContentPane().setBackground(new Color(18, 18, 35));
-            frame.add(new StatistiquePanel());
+            frame.add(new StatistiquePanel("root@iai.tg"));
             frame.setVisible(true);
         });
     }

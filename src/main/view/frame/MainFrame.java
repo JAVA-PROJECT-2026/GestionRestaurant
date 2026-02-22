@@ -77,7 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void configurerVisible(String loginConnecte){
-        statistique.setVisible("root".equals(loginConnecte));
+        statistique.setVisible("root@iai.tg".equals(loginConnecte));
     }
     
     @SuppressWarnings("unchecked")
@@ -236,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnCategorie.setBackground(new java.awt.Color(35, 166, 97));
         btnCategorie.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnCategorie.setForeground(new java.awt.Color(255, 255, 255));
-        btnCategorie.setText("    Catégories");
+        btnCategorie.setText("   Catégories");
         btnCategorie.setBorderPainted(false);
         btnCategorie.setContentAreaFilled(false);
         btnCategorie.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -251,7 +251,8 @@ public class MainFrame extends javax.swing.JFrame {
         statistique.setBackground(new java.awt.Color(35, 166, 97));
         statistique.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         statistique.setForeground(new java.awt.Color(255, 255, 255));
-        statistique.setText("Satatistiques");
+        statistique.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/stock-market.png"))); // NOI18N
+        statistique.setText("  Satatistiques");
         statistique.setBorderPainted(false);
         statistique.setContentAreaFilled(false);
         statistique.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -268,23 +269,21 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(btnCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(statistique, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addComponent(statistique, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(btnCategorie, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                .addGap(56, 56, 56)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(statistique, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(56, 56, 56))
         );
 
         deconnexion.setBackground(new java.awt.Color(102, 102, 102));
@@ -315,7 +314,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(27, 27, 27)
                 .addComponent(deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -333,9 +332,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
                 .addComponent(deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(164, 164, 164))
+                .addGap(142, 142, 142))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel3, jPanel5});
@@ -401,7 +400,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void statistiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statistiqueActionPerformed
         // TODO add your handling code here:
-        showPanel(new StatistiquePanel("root"));
+        showPanel(new StatistiquePanel("root@iai.tg"));
     }//GEN-LAST:event_statistiqueActionPerformed
 
     /**

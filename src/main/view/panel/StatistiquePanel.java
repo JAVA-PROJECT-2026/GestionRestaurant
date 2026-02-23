@@ -43,17 +43,17 @@ import java.util.Map;
  */
 public class StatistiquePanel extends JPanel {
 
-    // ── Palette de couleurs ────────────────────────────────────────────────────
-    private static final Color BG_DARK        = new Color(18, 18, 35);
+    //  Palette de couleurs 
+    private static final Color BG_DARK        = new Color(204, 204, 204);
     private static final Color BG_CARD        = new Color(28, 28, 50);
-    private static final Color BG_CHART       = new Color(22, 22, 42);
-    private static final Color ACCENT_PURPLE  = new Color(130, 80, 255);
+    private static final Color BG_CHART       = new Color(255, 255, 255);
+    private static final Color ACCENT_PURPLE  = new Color(35, 166, 97);
     private static final Color ACCENT_TEAL    = new Color(0, 200, 180);
     private static final Color ACCENT_ORANGE  = new Color(255, 140, 60);
     private static final Color ACCENT_RED     = new Color(255, 75, 100);
     private static final Color ACCENT_GREEN   = new Color(60, 220, 120);
-    private static final Color TEXT_MAIN      = new Color(240, 240, 255);
-    private static final Color TEXT_SUB       = new Color(150, 150, 180);
+    private static final Color TEXT_MAIN      = new Color(255, 255, 255);
+    private static final Color TEXT_SUB       = new Color(210, 210, 210);
     private static final Color GRID_COLOR     = new Color(40, 40, 65);
 
     private static final Font FONT_TITLE  = new Font("Segoe UI", Font.BOLD, 22);
@@ -77,24 +77,22 @@ public class StatistiquePanel extends JPanel {
         add(buildContent(),  BorderLayout.CENTER);
     }
 
-    // =========================================================
     //  HEADER
-    // =========================================================
     private JPanel buildHeader() {
         JPanel header = new JPanel(new BorderLayout());
         header.setOpaque(false);
         header.setBorder(new EmptyBorder(0, 0, 20, 0));
 
-        JLabel title = new JLabel("📊  Dashboard Statistiques");
+        JLabel title = new JLabel("Dashboard Statistiques");
         title.setFont(FONT_TITLE);
-        title.setForeground(TEXT_MAIN);
+        title.setForeground(new Color(0, 0, 0));
 
         String dateStr = new SimpleDateFormat("dd MMMM yyyy").format(new Date());
         JLabel dateLbl = new JLabel(dateStr);
         dateLbl.setFont(FONT_LABEL);
         dateLbl.setForeground(TEXT_SUB);
 
-        JButton refreshBtn = buildButton("⟳  Actualiser");
+        JButton refreshBtn = buildButton(" Actualiser");
         refreshBtn.addActionListener(e -> refresh());
 
         JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
@@ -107,9 +105,7 @@ public class StatistiquePanel extends JPanel {
         return header;
     }
 
-    // =========================================================
     //  CONTENU PRINCIPAL (scroll)
-    // =========================================================
     private JScrollPane buildContent() {
         JPanel content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
@@ -144,9 +140,7 @@ public class StatistiquePanel extends JPanel {
         return scroll;
     }
 
-    // =========================================================
     //  LIGNE DE KPI
-    // =========================================================
     private JPanel buildKPIRow() {
         JPanel row = new JPanel(new GridLayout(1, 5, 15, 0));
         row.setOpaque(false);
@@ -200,9 +194,7 @@ public class StatistiquePanel extends JPanel {
         return card;
     }
 
-    // =========================================================
     //  COURBE : CA PAR JOUR
-    // =========================================================
     private ChartPanel buildCourbeCA() {
         Map<String, Double> data = controller.getCAParJour();
         XYSeries series = new XYSeries("CA (FCFA)");
@@ -222,9 +214,7 @@ public class StatistiquePanel extends JPanel {
         return wrapChart(chart, 460, 280);
     }
 
-    // =========================================================
     //  COURBE : NOMBRE DE COMMANDES PAR JOUR
-    // =========================================================
     private ChartPanel buildCourbeCommandes() {
         Map<String, Integer> data = controller.getNbCommandesParJour();
         XYSeries series = new XYSeries("Commandes");
@@ -249,9 +239,7 @@ public class StatistiquePanel extends JPanel {
         return wrapChart(chart, 460, 280);
     }
 
-    // =========================================================
     //  HISTO : TOP 5 PRODUITS
-    // =========================================================
     private ChartPanel buildHistoTopProduits() {
         Map<String, Integer> data = controller.getTopProduits(5);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -271,9 +259,7 @@ public class StatistiquePanel extends JPanel {
         return wrapChart(chart, 460, 280);
     }
 
-    // =========================================================
     //  HISTO : COMMANDES PAR ÉTAT
-    // =========================================================
     private ChartPanel buildHistoEtats() {
         Map<String, Integer> data = controller.getCommandesParEtat();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -317,9 +303,7 @@ public class StatistiquePanel extends JPanel {
         return wrapChart(chart, 460, 280);
     }
 
-    // =========================================================
     //  HISTO : PRODUITS PAR CATÉGORIE
-    // =========================================================
     private ChartPanel buildHistoCategories() {
         Map<String, Integer> data = controller.getProduitsParCategorie();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -346,9 +330,7 @@ public class StatistiquePanel extends JPanel {
         return wrapChart(chart, Integer.MAX_VALUE, 300);
     }
 
-    // =========================================================
     //  HELPERS : STYLES
-    // =========================================================
     private void styleLineChart(JFreeChart chart, Color lineColor, Map<String, Double> labels) {
         applyChartGlobalStyle(chart);
 
@@ -439,9 +421,7 @@ public class StatistiquePanel extends JPanel {
         }
     }
 
-    // =========================================================
     //  HELPERS : LAYOUT
-    // =========================================================
     private JPanel buildChartsRow(ChartPanel left, ChartPanel right) {
         JPanel row = new JPanel(new GridLayout(1, 2, 15, 0));
         row.setOpaque(false);
@@ -495,9 +475,7 @@ public class StatistiquePanel extends JPanel {
         return s.length() > max ? s.substring(0, max - 1) + "…" : s;
     }
 
-    // =========================================================
     //  RAFRAÎCHIR
-    // =========================================================
     private void refresh() {
         removeAll();
         add(buildHeader(),  BorderLayout.NORTH);
@@ -506,9 +484,7 @@ public class StatistiquePanel extends JPanel {
         repaint();
     }
 
-    // =========================================================
     //  MAIN DE TEST — pour tester en standalone
-    // =========================================================
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("📊 Dashboard — Restaurant");
